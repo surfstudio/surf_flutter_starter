@@ -1,16 +1,23 @@
 import 'package:process_run/cmd_run.dart';
-import 'package:surf_flutter_starter/constants.dart';
 import 'package:surf_flutter_starter/exceptions.dart';
 import 'package:surf_flutter_starter/src/utils/logger.dart';
 
+/// Service of git & git-like operations, used for dealing with VCS.
 class GitService {
-  Future<void> cloneTemplateRepository() async {
+  /// Clones repository to specified location.
+  Future<void> cloneRepository({
+    required String repositoryUrl,
+    required String path,
+    required bool isShowingProgress,
+  }) async {
     final args = [
       'clone',
-      '--progress',
-      surfFlutterAppTemplateUrl,
-      '${currentDirectory.path}\\$templateProjectName',
+      repositoryUrl,
+      path,
     ];
+    if (isShowingProgress) {
+      args.add('--progress');
+    }
 
     final process = await runExecutableArguments(
       'git',

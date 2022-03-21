@@ -2,10 +2,17 @@ import 'package:args/command_runner.dart';
 import 'package:io/io.dart';
 import 'package:surf_flutter_starter/src/commands/create_command.dart';
 import 'package:surf_flutter_starter/src/jobs/clone_template_repository_job.dart';
+import 'package:surf_flutter_starter/src/repositories/template_repository.dart';
+import 'package:surf_flutter_starter/src/services/config_service.dart';
 import 'package:surf_flutter_starter/src/services/git_service.dart';
+import 'package:surf_flutter_starter/src/services/settings_service.dart';
 import 'package:surf_flutter_starter/src/utils/logger.dart';
 
+///
 class StarterCommandRunner extends CommandRunner<int> {
+  final _settingsService = SettingsService();
+
+  ///
   StarterCommandRunner()
       : super(
           'surf_flutter_starter',
@@ -17,6 +24,7 @@ class StarterCommandRunner extends CommandRunner<int> {
       abbr: 'v',
       negatable: false,
       callback: (isVerbose) {
+        _settingsService.isVerbose = isVerbose;
         if (isVerbose) {
           Logger.setVerbose();
         }
@@ -25,16 +33,24 @@ class StarterCommandRunner extends CommandRunner<int> {
 
     <Command<int>>[
       // TODO(taranov): should we implement DI system?
-      CreateCommand(CloneTemplateRepositoryJob(GitService())),
+      CreateCommand(
+        CloneTemplateJob(
+          TemplateRepository(
+            GitService(),
+            _settingsService,
+            ConfigService(),
+          ),
+        ),
+      ),
     ].forEach(addCommand);
   }
 
   @override
   Future<int> run(Iterable<String> args) async {
     try {
-      final _argResults = parse(args);
+      final argResults = parse(args);
 
-      final exitCode = await runCommand(_argResults) ?? ExitCode.success.code;
+      final exitCode = await runCommand(argResults) ?? ExitCode.success.code;
       return exitCode;
     } on Exception catch (e) {
       // ignore: avoid_print

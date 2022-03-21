@@ -1,21 +1,20 @@
 import 'package:surf_flutter_starter/exceptions.dart';
-import 'package:surf_flutter_starter/src/jobs/i_job.dart';
-import 'package:surf_flutter_starter/src/services/git_service.dart';
+import 'package:surf_flutter_starter/src/jobs/job.dart';
+import 'package:surf_flutter_starter/src/repositories/template_repository.dart';
 import 'package:surf_flutter_starter/src/utils/logger.dart';
 
-class CloneTemplateRepositoryJob extends IJob {
-  final GitService _gitService;
+/// [Job] for cloning project template.
+class CloneTemplateJob implements Job {
+  final TemplateRepository _templateRepository;
 
-  CloneTemplateRepositoryJob(this._gitService);
+  /// Constructor, in which repositories are passed.
+  const CloneTemplateJob(this._templateRepository);
 
   @override
   Future<void> execute() async {
     try {
-      final result = await _gitService.cloneTemplateRepository();
+      final result = await _templateRepository.getTemplate();
       return result;
-    } on GitException catch (e) {
-      logger.stderr(e.message);
-      throw JobException(e.toString());
     } on Exception catch (e) {
       logger.stderr(e.toString());
       throw JobException(e.toString());

@@ -6,12 +6,14 @@ import 'package:cli_util/cli_logging.dart' as log;
 import 'package:io/ansi.dart';
 // ignore_for_file: avoid_print
 
-/// Set logger for standard mode
+/// Set logger for standard mode.
 log.Logger logger = log.Logger.standard();
 
+/// Basic logger, that prints stuff in console.
 class Logger {
   Logger._();
 
+  /// Sets logger to verbose output.
   static void setVerbose() {
     logger = log.Logger.verbose();
   }
@@ -44,59 +46,46 @@ class Logger {
 /// Console controller instance
 final consoleController = ConsoleController();
 
+/// Controls & handles all terminal-based streams & outputs.
 class ConsoleController {
   /// Is running on CLI
   static bool isCli = false;
 
-  /// stdout stream
+  /// Stdout stream.
   final stdout = StreamController<List<int>>();
 
-  /// sderr stream
+  /// Stderr stream.
   final stderr = StreamController<List<int>>();
 
-  /// warning stream
+  /// Warning stream.
   final warning = StreamController<List<int>>();
 
-  /// fine stream
+  /// Fine stream.
   final fine = StreamController<List<int>>();
 
-  /// info stream
+  /// Info stream.
   final info = StreamController<List<int>>();
 
-  /// error stream
+  /// Error stream.
   final error = StreamController<List<int>>();
 
-  /// stdout stream sink
+  /// Stdout stream sink.
   StreamSink<List<int>> get stdoutSink {
     return isCli ? io.stdout : stdout.sink;
   }
 
-  /// stderr stream sink
+  /// Stderr stream sink.
   StreamSink<List<int>> get stderrSink {
     return isCli ? io.stderr : stderr.sink;
   }
 
-  void _closeStdout() {
+  /// Closes all streams.
+  void closeAll() {
     stdout.close();
-  }
-
-  void _closeStderr() {
     stderr.close();
-  }
-
-  void _closeWarning() {
     warning.close();
-  }
-
-  void _closeFine() {
     fine.close();
-  }
-
-  void _closeInfo() {
     info.close();
-  }
-
-  void _closeError() {
     error.close();
   }
 }
