@@ -12,5 +12,5 @@ class ConfigService {
   ///
   /// For the moment, does not include project's name.
   // TODO(taranov): refactor implementation to be based on user input.
-  final workingPath = '${Directory.current.path}\\temp';
+  final workingPath = '${Directory.current.path}\\temp.zip';
 }

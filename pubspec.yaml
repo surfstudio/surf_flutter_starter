@@ -9,6 +9,7 @@ environment:
 dependencies:
   args: ^2.3.0
   cli_util: ^0.3.5
+  dio: ^4.0.4
   io: ^1.0.3
   process_run: ^0.12.3+2
   surf_lint_rules: ^1.4.1
