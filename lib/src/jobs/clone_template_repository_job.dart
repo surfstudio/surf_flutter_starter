@@ -1,4 +1,4 @@
-import 'package:surf_flutter_starter/exceptions.dart';
+import 'package:surf_flutter_starter/src/exceptions.dart';
 import 'package:surf_flutter_starter/src/jobs/job.dart';
 import 'package:surf_flutter_starter/src/repositories/template_repository.dart';
 import 'package:surf_flutter_starter/src/utils/logger.dart';

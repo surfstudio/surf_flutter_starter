@@ -1,4 +1,4 @@
-import 'package:surf_flutter_starter/exceptions.dart';
+import 'package:surf_flutter_starter/src/exceptions.dart';
 import 'package:surf_flutter_starter/src/services/config_service.dart';
 import 'package:surf_flutter_starter/src/services/git_service.dart';
 import 'package:surf_flutter_starter/src/services/settings_service.dart';
