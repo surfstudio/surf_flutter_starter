@@ -24,8 +24,8 @@ class TemplateRepository {
         url: _settingsService.surfFlutterAppTemplateUrl,
         path: _configService.workingPath,
       );
-    } on GitException catch (e) {
-      logger.stderr(e.message);
+    } on NetworkException catch (e) {
+      logger.stderr(e.toString());
       throw RepositoryException(e.toString());
     }
   }

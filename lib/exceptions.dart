@@ -13,18 +13,6 @@ class JobException implements Exception {
   String toString() => 'Job Exception: $message';
 }
 
-/// Exception which is caused by git-specific & VCS operations.
-class GitException implements Exception {
-  /// Message, that describes [Exception].
-  final String message;
-
-  /// Constructor, which takes message & sets it empty otherwise.
-  const GitException([this.message = '']);
-
-  @override
-  String toString() => 'Git Exception: $message';
-}
-
 /// Exception which is caused by repository operations.
 class RepositoryException implements Exception {
   /// Message, that describes [Exception].

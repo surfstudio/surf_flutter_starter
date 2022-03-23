@@ -1,4 +1,5 @@
 import 'package:io/io.dart';
+import 'package:surf_flutter_starter/exceptions.dart';
 import 'package:surf_flutter_starter/src/commands/base_command.dart';
 import 'package:surf_flutter_starter/src/executor.dart';
 import 'package:surf_flutter_starter/src/jobs/job.dart';
@@ -24,7 +25,7 @@ class CreateCommand extends BaseCommand {
     try {
       await _executor.run(null);
       return ExitCode.success.code;
-    } on Exception {
+    } on ExecutorException {
       return ExitCode.usage.code;
     }
   }

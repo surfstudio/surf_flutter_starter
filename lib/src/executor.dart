@@ -18,7 +18,8 @@ class Executor {
     try {
       await _cloneTemplateJob.execute();
     } on JobException catch (e) {
-      Logger.error(e.message);
+      Logger.error(e.toString());
+      throw ExecutorException(e.message);
     }
     return;
   }

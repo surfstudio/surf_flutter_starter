@@ -15,7 +15,7 @@ class CloneTemplateJob implements Job {
     try {
       final result = await _templateRepository.getTemplate();
       return result;
-    } on Exception catch (e) {
+    } on RepositoryException catch (e) {
       logger.stderr(e.toString());
       throw JobException(e.toString());
     }
