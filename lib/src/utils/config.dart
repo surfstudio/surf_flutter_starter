@@ -4,6 +4,7 @@
 /// into new project when it's being created by user. User
 /// defines those values & parameters whilst interacting with
 /// CLI.
+// TODO(taranov): Migrate this to another Config. (lib/src/config/config.dart).
 class Config {
   ///
   final String projectName;

@@ -20,9 +20,11 @@ class TemplateRepository {
   /// Gets project template & saves it in working directory.
   Future<void> getTemplate() async {
     try {
+      final fullPath =
+          '${_configService.configInstance.projectPath.value}\\${_configService.configInstance.projectName.value}\\template_archive.zip';
       await _networkService.download(
         url: _settingsService.surfFlutterAppTemplateUrl,
-        path: _configService.workingPath,
+        path: fullPath,
       );
     } on NetworkException catch (e) {
       logger.stderr(e.toString());

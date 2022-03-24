@@ -14,6 +14,7 @@ import 'package:surf_flutter_starter/src/utils/logger.dart';
 class StarterCommandRunner extends CommandRunner<int> {
   final _settingsService = SettingsService();
   final _networkService = DioService(Dio());
+  final _configService = ConfigService();
 
   ///
   StarterCommandRunner()
@@ -38,11 +39,12 @@ class StarterCommandRunner extends CommandRunner<int> {
       // TODO(taranov): should we implement DI system?
       CreateCommand(
         Executor(
+          _configService,
           CloneTemplateJob(
             TemplateRepository(
               _networkService,
               _settingsService,
-              ConfigService(),
+              _configService,
             ),
           ),
         ),
