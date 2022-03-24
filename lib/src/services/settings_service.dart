@@ -20,4 +20,5 @@ class SettingsService {
   SettingsService();
 }
 
-const _surfFlutterAppTemplateUrl = 'https://github.com/surfstudio/surf-flutter-app-template.git';
+const _surfFlutterAppTemplateUrl =
+    'https://github.com/surfstudio/surf-flutter-app-template/archive/refs/heads/main.zip';

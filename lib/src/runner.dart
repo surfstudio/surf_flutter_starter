@@ -1,16 +1,19 @@
 import 'package:args/command_runner.dart';
+import 'package:dio/dio.dart';
 import 'package:io/io.dart';
 import 'package:surf_flutter_starter/src/commands/create_command.dart';
+import 'package:surf_flutter_starter/src/executor.dart';
 import 'package:surf_flutter_starter/src/jobs/clone_template_repository_job.dart';
 import 'package:surf_flutter_starter/src/repositories/template_repository.dart';
 import 'package:surf_flutter_starter/src/services/config_service.dart';
-import 'package:surf_flutter_starter/src/services/git_service.dart';
+import 'package:surf_flutter_starter/src/services/network_service.dart';
 import 'package:surf_flutter_starter/src/services/settings_service.dart';
 import 'package:surf_flutter_starter/src/utils/logger.dart';
 
 ///
 class StarterCommandRunner extends CommandRunner<int> {
   final _settingsService = SettingsService();
+  final _networkService = DioService(Dio());
 
   ///
   StarterCommandRunner()
@@ -34,11 +37,13 @@ class StarterCommandRunner extends CommandRunner<int> {
     <Command<int>>[
       // TODO(taranov): should we implement DI system?
       CreateCommand(
-        CloneTemplateJob(
-          TemplateRepository(
-            GitService(),
-            _settingsService,
-            ConfigService(),
+        Executor(
+          CloneTemplateJob(
+            TemplateRepository(
+              _networkService,
+              _settingsService,
+              ConfigService(),
+            ),
           ),
         ),
       ),
