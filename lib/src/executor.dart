@@ -12,7 +12,9 @@ class Executor {
   /// Constructor for [Executor]
   const Executor(this._cloneTemplateJob);
 
+  /// [Executor]'s entry point for creating projects.
   ///
+  /// Uses series of [Job] runs to do so.
   // TODO(taranov): add config-object to method 'run'
   Future<void> run(Object? config) async {
     try {

@@ -10,12 +10,12 @@ import 'package:surf_flutter_starter/src/services/network_service.dart';
 import 'package:surf_flutter_starter/src/services/settings_service.dart';
 import 'package:surf_flutter_starter/src/utils/logger.dart';
 
-///
+/// CLI-entry point for starting commands.
 class StarterCommandRunner extends CommandRunner<int> {
   final _settingsService = SettingsService();
   final _networkService = DioService(Dio());
 
-  ///
+  /// Constructor for Runner.
   StarterCommandRunner()
       : super(
           'surf_flutter_starter',
