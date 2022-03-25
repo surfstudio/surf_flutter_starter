@@ -1,19 +1,27 @@
-// TODO(taranov): Documentation.
-///
+import 'package:surf_flutter_starter/src/config/config.dart';
+
+/// Single user-specified Parameter for [Config].
 abstract class ConfigParameter {
+  /// Value of a given parameter.
   ///
+  /// May be implemented as any type. Defaults to nullable [Object].
   final Object? _value;
 
+  /// Value's Getter.
   ///
+  /// Assert value validity before value returns from function.
   Object get value {
     assert(isValid);
     return _value!;
   }
 
+  /// Validates value.
   ///
+  /// By default returns 'true' if value is not null.
+  /// May be overridden to indicate specific values.
   bool get isValid => _value != null;
 
-  ///
+  /// Constructor, in which value is given.
   const ConfigParameter(this._value);
 
   @override
@@ -22,7 +30,7 @@ abstract class ConfigParameter {
   }
 }
 
-///
+/// Default 'Empty' parameter.
 class EmptyParameter implements ConfigParameter {
   @override
   bool get isValid => false;
@@ -39,9 +47,8 @@ class EmptyParameter implements ConfigParameter {
   }
 }
 
-///
+/// Directory path, in which project is going to be created.
 class ProjectPath implements EmptyParameter {
-  ///
   final String? _value;
 
   @override
@@ -53,10 +60,10 @@ class ProjectPath implements EmptyParameter {
     return _value!;
   }
 
-  ///
+  /// Constructor, in which Path is passed.
   const ProjectPath(this._value);
 
-  ///
+  /// Empty factory.
   factory ProjectPath.empty() => ProjectPath(null);
 
   @override
@@ -65,9 +72,8 @@ class ProjectPath implements EmptyParameter {
   }
 }
 
-///
+/// Name of project, that is going to be created.
 class ProjectName implements EmptyParameter {
-  ///
   final String? _value;
 
   @override
@@ -79,10 +85,10 @@ class ProjectName implements EmptyParameter {
     return _value!;
   }
 
-  ///
+  /// Constructor, in which project name is passed.
   const ProjectName(this._value);
 
-  ///
+  /// Empty factory.
   factory ProjectName.empty() => ProjectName(null);
 
   @override
@@ -91,9 +97,8 @@ class ProjectName implements EmptyParameter {
   }
 }
 
-///
+/// Application ID of project, that is going to be created.
 class AppID implements EmptyParameter {
-  ///
   final String? _value;
 
   @override
@@ -105,10 +110,10 @@ class AppID implements EmptyParameter {
     return _value!;
   }
 
-  ///
+  /// Constructor, in which appID value is passed.
   const AppID(this._value);
 
-  ///
+  /// Empty factory.
   factory AppID.empty() => AppID(null);
 
   @override
