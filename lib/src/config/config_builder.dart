@@ -1,25 +1,27 @@
 import 'package:surf_flutter_starter/src/config/config.dart';
 import 'package:surf_flutter_starter/src/config/config_parameter.dart';
+import 'package:surf_flutter_starter/src/executor.dart';
 
-// TODO(taranov): Documentation.
-///
+/// Builds config.
 abstract class ConfigBuilder {
+  /// [Config] private instance.
   ///
+  /// Default to an empty config with empty parameters.
   Config _config = Config.empty();
 
-  ///
+  /// Builds [ProjectPath].
   void buildProjectPath(String _) => _config.copyWith(projectPathValue: ProjectPath.empty());
 
-  ///
+  /// Builds [ProjectName].
   void buildProjectName(String _) => _config.copyWith(projectNameValue: ProjectName.empty());
 
-  ///
+  /// Builds [AppID].
   void buildAppID(String _) => _config.copyWith(appIDValue: AppID.empty());
 
-  ///
+  /// Returns [Config] instance.
   Config build() => _config;
 
-  ///
+  /// Builds [Config] with given parameters.
   Config buildWithParameters({
     required String projectPathValue,
     required String projectNameValue,
@@ -32,7 +34,11 @@ abstract class ConfigBuilder {
   }
 }
 
+/// 'Config'-MVP, used for initial [Executor] run.
 ///
+/// Consists of [ProjectName], [ProjectPath] & [AppID].
+/// Is bare minimal of a project entity & its builder only used for
+/// quick & easy [Executor] start.
 class MinimalConfigBuilder extends ConfigBuilder {
   @override
   void buildProjectPath(String value) {
