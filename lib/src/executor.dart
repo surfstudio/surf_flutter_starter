@@ -18,7 +18,9 @@ class Executor {
     this._cloneTemplateJob,
   );
 
+  /// [Executor]'s entry point for creating projects.
   ///
+  /// Uses series of [Job] runs to do so.
   Future<void> run(Config config) async {
     try {
       // Setting Config object to it's instance, so that Job's can access it via ConfigService.
