@@ -4,7 +4,7 @@ import 'package:surf_flutter_starter/src/services/network_service.dart';
 import 'package:surf_flutter_starter/src/services/settings_service.dart';
 import 'package:surf_flutter_starter/src/utils/logger.dart';
 
-///Repository for managing basic project template
+/// Repository for managing basic project template.
 class TemplateRepository {
   final NetworkService _networkService;
   final SettingsService _settingsService;
