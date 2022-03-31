@@ -23,7 +23,7 @@ class CreateCommand extends BaseCommand {
   @override
   Future<int> run() async {
     try {
-      await _executor.run(null);
+      await _executor.run();
       return ExitCode.success.code;
     } on ExecutorException {
       return ExitCode.usage.code;

@@ -15,8 +15,7 @@ class Executor {
   /// [Executor]'s entry point for creating projects.
   ///
   /// Uses series of [Job] runs to do so.
-  // TODO(taranov): add config-object to method 'run'
-  Future<void> run(Object? config) async {
+  Future<void> run() async {
     try {
       await _cloneTemplateJob.execute();
     } on JobException catch (e) {
