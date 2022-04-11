@@ -1,6 +1,6 @@
 import 'package:io/io.dart';
-import 'package:surf_flutter_starter/exceptions.dart';
 import 'package:surf_flutter_starter/src/commands/base_command.dart';
+import 'package:surf_flutter_starter/src/exceptions.dart';
 import 'package:surf_flutter_starter/src/executor.dart';
 import 'package:surf_flutter_starter/src/jobs/job.dart';
 

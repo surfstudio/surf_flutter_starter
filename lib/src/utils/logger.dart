@@ -18,38 +18,38 @@ class Logger {
     logger = log.Logger.verbose();
   }
 
-  /// Prints success message
+  /// Prints success message.
   static void fine(String message) {
     print(cyan.wrap(message));
     consoleController.fine.add(utf8.encode(message));
   }
 
-  /// Prints [message] with warning formatting
+  /// Prints [message] with warning formatting.
   static void warning(String message) {
     print(yellow.wrap(message));
     consoleController.warning.add(utf8.encode(message));
   }
 
-  /// Prints [message] with info formatting
+  /// Prints [message] with info formatting.
   static void info(String message) {
     print(message);
     consoleController.info.add(utf8.encode(message));
   }
 
-  /// Prints [message] with error formatting
+  /// Prints [message] with error formatting.
   static void error(String message) {
     print(red.wrap(message));
     consoleController.error.add(utf8.encode(message));
   }
 }
 
-/// Console controller instance
+/// Console controller instance.
 final consoleController = ConsoleController();
 
 /// Controls & handles all terminal-based streams & outputs.
 class ConsoleController {
-  /// Is running on CLI
-  static bool isCli = false;
+  /// Is running on CLI.
+  static bool isCli = true;
 
   /// Stdout stream.
   final stdout = StreamController<List<int>>();

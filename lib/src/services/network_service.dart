@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:surf_flutter_starter/exceptions.dart';
+import 'package:surf_flutter_starter/src/exceptions.dart';
 import 'package:surf_flutter_starter/src/utils/logger.dart';
 
 /// Implements network-based calls & requests.
@@ -24,6 +24,7 @@ class DioService implements NetworkService {
   @override
   Future<void> download({required String url, required String path}) async {
     try {
+      Logger.fine(path);
       final result = await dio.download(url, path);
       if (result.statusCode == null || result.statusCode! >= 300) {
         Logger.error(result.data.toString());

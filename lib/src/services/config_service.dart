@@ -1,16 +1,21 @@
-import 'dart:io';
-
+import 'package:surf_flutter_starter/src/config/config.dart';
 import 'package:surf_flutter_starter/src/services/settings_service.dart';
 
 /// Customizes project specific configuration.
 ///
 /// Is different from [SettingsService] because [ConfigService] only deals with
 /// project creation process & its' specifics. It does not care about its' CLI
-/// dependencies or version management.
+/// dependencies or version management. Holds [Config] instance.
 class ConfigService {
-  /// Destination, in which new project is created.
-  ///
-  /// For the moment, does not include project's name.
-  // TODO(taranov): refactor implementation to be based on user input.
-  final workingPath = '${Directory.current.path}\\temp.zip';
+  /// Gets [Config] current instance.
+  Config get configInstance => _configInstance;
+
+  /// Initial, empty [Config].
+  Config _configInstance = Config.empty();
+
+  /// Constructor for [ConfigService].
+  ConfigService();
+
+  /// Sets current instance to new [Config].
+  void setConfig(Config newConfig) => _configInstance = newConfig;
 }
