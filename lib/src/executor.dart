@@ -8,7 +8,7 @@ import 'package:surf_flutter_starter/src/utils/logger.dart';
 ///
 /// Project creation is, essentially, series of [Job]'s.
 class Executor {
-  final GetProjectConfigJob _getProjectConfigJob;
+  final GetConfigCLIJob _getProjectConfigJob;
   final CloneTemplateJob _cloneTemplateJob;
 
   /// Constructor for [Executor].

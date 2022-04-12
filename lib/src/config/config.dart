@@ -12,12 +12,14 @@ class Config {
 
   /// Name of new project.
   ///
-  /// See also: https://dart.dev/tools/pub/pubspec#name
+  /// See also:
+  /// * https://dart.dev/tools/pub/pubspec#name
   final ProjectName projectName;
 
   /// Application ID.
   ///
-  /// See also: https://developer.android.com/studio/build/configure-app-module#set_the_application_id
+  /// See also:
+  /// * https://developer.android.com/studio/build/configure-app-module#set_the_application_id
   final AppID appID;
 
   /// Validity of config.
@@ -35,11 +37,12 @@ class Config {
   /// [Config] factory, that makes an empty config.
   factory Config.empty() {
     return Config(
-      projectPath: ProjectPath.empty(),
-      projectName: ProjectName.empty(),
-      appID: AppID.empty(),
+      projectPath: ProjectPath(null),
+      projectName: ProjectName(null),
+      appID: AppID(null),
     );
   }
+
   @override
   String toString() {
     return 'Config(valid: $isValid): $projectPath $projectName $appID';

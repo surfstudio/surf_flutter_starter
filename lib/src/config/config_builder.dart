@@ -2,7 +2,7 @@ import 'package:surf_flutter_starter/src/config/config.dart';
 import 'package:surf_flutter_starter/src/config/config_parameter.dart';
 import 'package:surf_flutter_starter/src/executor.dart';
 
-/// Builds config.
+/// Builds [Config].
 abstract class ConfigBuilder {
   /// [Config] private instance.
   ///
@@ -10,13 +10,13 @@ abstract class ConfigBuilder {
   Config _config = Config.empty();
 
   /// Builds [ProjectPath].
-  void buildProjectPath(String _) => _config.copyWith(projectPathValue: ProjectPath.empty());
+  void buildProjectPath(String projectPath);
 
   /// Builds [ProjectName].
-  void buildProjectName(String _) => _config.copyWith(projectNameValue: ProjectName.empty());
+  void buildProjectName(String projectName);
 
   /// Builds [AppID].
-  void buildAppID(String _) => _config.copyWith(appIDValue: AppID.empty());
+  void buildAppID(String appID);
 
   /// Returns [Config] instance.
   Config build() => _config;

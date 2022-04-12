@@ -11,15 +11,13 @@ import 'package:surf_flutter_starter/src/repositories/template_repository.dart';
 import 'package:surf_flutter_starter/src/services/config_service.dart';
 import 'package:surf_flutter_starter/src/services/dialog_service.dart';
 import 'package:surf_flutter_starter/src/services/network_service.dart';
-import 'package:surf_flutter_starter/src/services/settings_service.dart';
 import 'package:surf_flutter_starter/src/utils/logger.dart';
 import 'package:surf_flutter_starter/src/utils/terminal.dart';
 
 /// CLI-entry point for starting commands.
 class StarterCommandRunner extends CommandRunner<int> {
-  final _settingsService = SettingsService();
   final _networkService = DioService(Dio());
-  final _configService = ConfigService();
+  final _configService = ConfigService(MinimalConfigBuilder());
 
   /// Constructor for Runner.
   StarterCommandRunner()
@@ -33,7 +31,6 @@ class StarterCommandRunner extends CommandRunner<int> {
       abbr: 'v',
       negatable: false,
       callback: (isVerbose) {
-        _settingsService.isVerbose = isVerbose;
         if (isVerbose) {
           Logger.setVerbose();
         }
@@ -44,18 +41,17 @@ class StarterCommandRunner extends CommandRunner<int> {
       // TODO(taranov): should we implement DI system?
       CreateCommand(
         Executor(
-          GetProjectConfigJob(
+          GetConfigCLIJob(
             ConfigRepository(
               TerminalDialogService(
                 Terminal(),
               ),
+              _configService,
             ),
-            MinimalConfigBuilder(),
           ),
           CloneTemplateJob(
             TemplateRepository(
               _networkService,
-              _settingsService,
               _configService,
             ),
           ),
