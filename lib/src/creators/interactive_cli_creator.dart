@@ -21,13 +21,13 @@ class InteractiveCLICreator extends Creator {
   @override
   Future<Config> prepareConfig() async {
     final config = await _getConfigCLIJob.execute();
+    // Setting Config to service's instance, so that all jobs can require it there.
+    _configService.setConfig(config);
     return config;
   }
 
   @override
   Future<void> createByConfig(Config config) async {
-    // Setting Config to service's instance, so that all jobs can require it there.
-    _configService.setConfig(config);
     // Run series of jobs.
     await _cloneTemplateJob.execute();
   }

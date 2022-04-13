@@ -16,15 +16,6 @@ class ConfigRepository {
   final ConfigService _configService;
   late final ConfigBuilder _configBuilder;
 
-  /// Gets [ProjectName] from user as 'String'.
-  String get _getProjectNameInput => _dialogService.getUserInput(userPrompt: _projectNamePrompt);
-
-  /// Gets [ProjectPath] from user as 'String'.
-  String get _getProjectPathInput => _dialogService.getUserInput(userPrompt: _projectPathPrompt);
-
-  /// Gets [AppID] from user as 'String'.
-  String get _getProjectAppIDInput => _dialogService.getUserInput(userPrompt: _appIDPrompt);
-
   /// Constructor, in which services are passed.
   ConfigRepository(
     this._dialogService,
@@ -42,13 +33,13 @@ class ConfigRepository {
   /// Returns [Config] instance, that is built by [ConfigBuilder].
   Config getConfigFromUserInput() {
     try {
-      final projectName = _getProjectNameInput;
+      final projectName = _dialogService.getUserInput(userPrompt: _projectNamePrompt);
       _configBuilder.buildProjectName(projectName);
 
-      final projectPath = _getProjectPathInput;
+      final projectPath = _dialogService.getUserInput(userPrompt: _projectPathPrompt);
       _configBuilder.buildProjectPath(projectPath);
 
-      final appID = _getProjectAppIDInput;
+      final appID = _dialogService.getUserInput(userPrompt: _appIDPrompt);
       _configBuilder.buildAppID(appID);
 
       return _configBuilder.build();
