@@ -3,9 +3,10 @@ import 'package:dio/dio.dart';
 import 'package:io/io.dart';
 import 'package:surf_flutter_starter/src/commands/create_command.dart';
 import 'package:surf_flutter_starter/src/config/config_builder.dart';
-import 'package:surf_flutter_starter/src/executor.dart';
-import 'package:surf_flutter_starter/src/jobs/clone_template_repository_job.dart';
-import 'package:surf_flutter_starter/src/jobs/get_project_config_job.dart';
+import 'package:surf_flutter_starter/src/creators/automatic_creator.dart';
+import 'package:surf_flutter_starter/src/creators/interactive_cli_creator.dart';
+import 'package:surf_flutter_starter/src/jobs/clone_template_job.dart';
+import 'package:surf_flutter_starter/src/jobs/get_config_cli_job.dart';
 import 'package:surf_flutter_starter/src/repositories/config_repository.dart';
 import 'package:surf_flutter_starter/src/repositories/template_repository.dart';
 import 'package:surf_flutter_starter/src/services/config_service.dart';
@@ -16,9 +17,6 @@ import 'package:surf_flutter_starter/src/utils/terminal.dart';
 
 /// CLI-entry point for starting commands.
 class StarterCommandRunner extends CommandRunner<int> {
-  final _networkService = DioService(Dio());
-  final _configService = ConfigService(MinimalConfigBuilder());
-
   /// Constructor for Runner.
   StarterCommandRunner()
       : super(
@@ -36,26 +34,31 @@ class StarterCommandRunner extends CommandRunner<int> {
         }
       },
     );
+    // TODO(taranov): should we implement DI system?
+    // Services:
+    final _networkService = DioService(Dio());
+    final _configService = ConfigService(MinimalConfigBuilder());
 
+    // Repositories:
+    final _configRepository = ConfigRepository(
+      TerminalDialogService(
+        Terminal(),
+      ),
+      _configService,
+    );
+    final _templateRepository = TemplateRepository(_networkService, _configService);
+
+    // Jobs:
+    final _getConfigCLIJob = GetConfigCLIJob(_configRepository);
+    final _cloneTemplateJob = CloneTemplateJob(_templateRepository);
     <Command<int>>[
-      // TODO(taranov): should we implement DI system?
       CreateCommand(
-        Executor(
-          GetConfigCLIJob(
-            ConfigRepository(
-              TerminalDialogService(
-                Terminal(),
-              ),
-              _configService,
-            ),
-          ),
-          CloneTemplateJob(
-            TemplateRepository(
-              _networkService,
-              _configService,
-            ),
-          ),
+        InteractiveCLICreator(
+          _getConfigCLIJob,
+          _cloneTemplateJob,
+          _configService,
         ),
+        AutomaticCreator(),
       ),
     ].forEach(addCommand);
   }

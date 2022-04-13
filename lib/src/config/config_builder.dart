@@ -1,6 +1,6 @@
 import 'package:surf_flutter_starter/src/config/config.dart';
 import 'package:surf_flutter_starter/src/config/config_parameter.dart';
-import 'package:surf_flutter_starter/src/executor.dart';
+import 'package:surf_flutter_starter/src/creators/creator.dart';
 
 /// Builds [Config].
 abstract class ConfigBuilder {
@@ -34,11 +34,11 @@ abstract class ConfigBuilder {
   }
 }
 
-/// 'Config'-MVP, used for initial [Executor] run.
+/// 'Config'-MVP, used for initial [Creator.start].
 ///
 /// Consists of [ProjectName], [ProjectPath] & [AppID].
 /// Is bare minimal of a project entity & its builder only used for
-/// quick & easy [Executor] start.
+/// quick & easy [Creator.start].
 class MinimalConfigBuilder extends ConfigBuilder {
   @override
   void buildProjectPath(String value) {

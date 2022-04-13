@@ -1,4 +1,4 @@
-import 'package:surf_flutter_starter/src/executor.dart';
+import 'package:surf_flutter_starter/src/creators/creator.dart';
 import 'package:surf_flutter_starter/src/jobs/job.dart';
 
 /// Exception for internal tasks of project creation.
@@ -43,15 +43,15 @@ class NetworkException implements Exception {
   String toString() => 'Network Exception: $message; Status Code - $statusCode';
 }
 
-/// Exception which is caused by [Executor] operations.
+/// Exception which is caused by [Creator] operations.
 ///
 /// Occurs when at least one [Job] fails.
-class ExecutorException implements Exception {
+class CreatorException implements Exception {
   /// Message, that describes [Exception].
   final String message;
 
   /// Constructor, which takes message & sets it empty otherwise.
-  const ExecutorException([this.message = '']);
+  const CreatorException([this.message = '']);
 
   @override
   String toString() => 'Executor Exception: $message';

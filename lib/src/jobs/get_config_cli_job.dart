@@ -12,12 +12,13 @@ class GetConfigCLIJob implements Job {
   GetConfigCLIJob(this._configRepository);
 
   @override
-  Future<void> execute() async {
+  Future<Config> execute() async {
     try {
-      final _config = _configRepository.getConfigFromUserInput();
+      final config = _configRepository.getConfigFromUserInput();
 
       Logger.info('Config is built');
-      Logger.info('$_config');
+      Logger.info('$config');
+      return config;
     } on RepositoryException catch (e) {
       Logger.error(e.message);
       throw JobException(e.message);
