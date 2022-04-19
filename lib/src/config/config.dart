@@ -4,9 +4,12 @@ import 'package:surf_flutter_starter/src/config/config_parameter.dart';
 ///
 /// Consists of values & parameters, that are being inserted
 /// into new project when it's being created by user. User
-/// defines those values & parameters whilst interacting with
-/// CLI.
+/// defines those values & parameters as [ConfigParameter]s
+/// whilst interacting with CLI.
 class Config {
+  /// Url for template, which is used in project generation process.
+  static const templateUrl = 'https://github.com/surfstudio/surf-flutter-app-template/archive/refs/heads/main.zip';
+
   /// Directory, in which new project is created.
   final ProjectPath projectPath;
 
@@ -22,9 +25,9 @@ class Config {
   /// * https://developer.android.com/studio/build/configure-app-module#set_the_application_id
   final AppID appID;
 
-  /// Validity of config.
+  /// Validity of [Config].
   ///
-  /// Validity is, as a whole, based on validity of all Config's [ConfigParameter].
+  /// Validity is, as a whole, based on validity of all [Config]'s [ConfigParameter].
   bool get isValid => projectPath.isValid && projectName.isValid && appID.isValid;
 
   /// [Config] constructor, in which parameters are passed.

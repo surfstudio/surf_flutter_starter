@@ -2,7 +2,6 @@ import 'package:surf_flutter_starter/src/config/config.dart';
 import 'package:surf_flutter_starter/src/config/config_builder.dart';
 import 'package:surf_flutter_starter/src/config/config_parameter.dart';
 import 'package:surf_flutter_starter/src/exceptions.dart';
-import 'package:surf_flutter_starter/src/services/config_service.dart';
 import 'package:surf_flutter_starter/src/services/dialog_service.dart';
 import 'package:surf_flutter_starter/src/utils/logger.dart';
 
@@ -13,16 +12,14 @@ const _appIDPrompt = 'Please, type in app ID (com.example.id):';
 /// Handles all [Config] interactions.
 class ConfigRepository {
   final DialogService _dialogService;
-  final ConfigService _configService;
-  late final ConfigBuilder _configBuilder;
+  final ConfigBuilder _configBuilder;
 
   /// Constructor, in which services are passed.
   ConfigRepository(
     this._dialogService,
-    this._configService,
+    this._configBuilder,
   ) {
     // Pass the builder's instance.
-    _configBuilder = _configService.configBuilder;
   }
 
   /// Gets [Config], that is typed by user.

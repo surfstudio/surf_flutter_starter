@@ -9,7 +9,6 @@ import 'package:surf_flutter_starter/src/jobs/clone_template_job.dart';
 import 'package:surf_flutter_starter/src/jobs/get_config_cli_job.dart';
 import 'package:surf_flutter_starter/src/repositories/config_repository.dart';
 import 'package:surf_flutter_starter/src/repositories/template_repository.dart';
-import 'package:surf_flutter_starter/src/services/config_service.dart';
 import 'package:surf_flutter_starter/src/services/dialog_service.dart';
 import 'package:surf_flutter_starter/src/services/network_service.dart';
 import 'package:surf_flutter_starter/src/utils/logger.dart';
@@ -37,16 +36,15 @@ class StarterCommandRunner extends CommandRunner<int> {
     // TODO(taranov): should we implement DI system?
     // Services:
     final _networkService = DioService(Dio());
-    final _configService = ConfigService(MinimalConfigBuilder());
 
     // Repositories:
     final _configRepository = ConfigRepository(
       TerminalDialogService(
         Terminal(),
       ),
-      _configService,
+      MinimalConfigBuilder(),
     );
-    final _templateRepository = TemplateRepository(_networkService, _configService);
+    final _templateRepository = TemplateRepository(_networkService);
 
     // Jobs:
     final _getConfigCLIJob = GetConfigCLIJob(_configRepository);
@@ -56,7 +54,6 @@ class StarterCommandRunner extends CommandRunner<int> {
         InteractiveCLICreator(
           _getConfigCLIJob,
           _cloneTemplateJob,
-          _configService,
         ),
         AutomaticCreator(),
       ),

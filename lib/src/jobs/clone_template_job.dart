@@ -1,3 +1,4 @@
+import 'package:surf_flutter_starter/src/config/config.dart';
 import 'package:surf_flutter_starter/src/exceptions.dart';
 import 'package:surf_flutter_starter/src/jobs/job.dart';
 import 'package:surf_flutter_starter/src/repositories/template_repository.dart';
@@ -11,9 +12,13 @@ class CloneTemplateJob implements Job {
   const CloneTemplateJob(this._templateRepository);
 
   @override
-  Future<void> execute() async {
+  Future<void> execute(Config config) async {
     try {
-      final result = await _templateRepository.getTemplate();
+      final result = await _templateRepository.fetchTemplateToDirectory(
+        templateName: config.projectName.value!,
+        savingPath: config.projectPath.value!,
+        templateUrl: Config.templateUrl,
+      );
       return result;
     } on RepositoryException catch (e) {
       logger.stderr(e.toString());
