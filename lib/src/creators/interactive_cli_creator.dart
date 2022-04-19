@@ -24,6 +24,7 @@ class InteractiveCLICreator extends Creator {
   @override
   Future<void> createByConfig(Config config) async {
     // Run series of jobs.
-    await _cloneTemplateJob.execute(config);
+    _cloneTemplateJob.setupJob(config);
+    await _cloneTemplateJob.execute();
   }
 }
