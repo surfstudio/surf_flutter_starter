@@ -1,4 +1,6 @@
-include: package:flutter_lints/flutter.yaml
+include: package:surf_lint_rules/analysis_options.yaml
 
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+linter:
+  rules:
+    - public_member_api_docs
+    - always_put_required_named_parameters_first: false
