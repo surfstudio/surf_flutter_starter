@@ -1,6 +1,7 @@
 import 'package:surf_flutter_starter/src/config/config.dart';
 import 'package:surf_flutter_starter/src/creators/creator.dart';
 import 'package:surf_flutter_starter/src/jobs/clone_template_job.dart';
+import 'package:surf_flutter_starter/src/jobs/extract_project_archive_job.dart';
 import 'package:surf_flutter_starter/src/jobs/get_config_cli_job.dart';
 import 'package:surf_flutter_starter/src/jobs/job.dart';
 
@@ -8,11 +9,13 @@ import 'package:surf_flutter_starter/src/jobs/job.dart';
 class InteractiveCLICreator extends Creator {
   final GetConfigCLIJob _getConfigCLIJob;
   final CloneTemplateJob _cloneTemplateJob;
+  final ExtractProjectArchiveJob _extractProjectArchiveJob;
 
   /// Constructor, in which [Job]s are passed.
   InteractiveCLICreator(
     this._getConfigCLIJob,
     this._cloneTemplateJob,
+    this._extractProjectArchiveJob,
   );
 
   @override
@@ -26,5 +29,8 @@ class InteractiveCLICreator extends Creator {
     // Run series of jobs.
     _cloneTemplateJob.setupJob(config);
     await _cloneTemplateJob.execute();
+
+    _extractProjectArchiveJob.setupJob(config);
+    await _extractProjectArchiveJob.execute();
   }
 }

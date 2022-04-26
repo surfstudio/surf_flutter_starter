@@ -68,3 +68,15 @@ class InputException implements Exception {
   @override
   String toString() => 'Value Exception: $message';
 }
+
+/// Exception which is caused by user input.
+class FileSystemException implements Exception {
+  /// Message, that describes [Exception].
+  final String message;
+
+  /// Constructor, which takes message & sets it empty otherwise.
+  const FileSystemException([this.message = '']);
+
+  @override
+  String toString() => 'FileSystem Exception: $message';
+}

@@ -16,8 +16,8 @@ class GetConfigCLIJob implements Job {
     try {
       final config = _configRepository.getConfigFromUserInput();
 
-      Logger.info('Config is built');
-      Logger.info('$config');
+      Logger.fine('Config is built');
+      Logger.fine('$config');
       return config;
     } on RepositoryException catch (e) {
       Logger.error(e.message);
