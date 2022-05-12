@@ -43,7 +43,7 @@ class StarterCommandRunner extends CommandRunner<int> {
     final _networkService = DioService(Dio());
     final _archiveService = ZipArchiveService();
     final _directoryService = IODirectoryService();
-    final _renamingService = RenamingService(ProcessManager());
+    final _renamingService = RenamingService();
 
     // Repositories:
     final _configRepository = ConfigRepository(

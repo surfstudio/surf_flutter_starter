@@ -5,11 +5,6 @@ import 'package:surf_flutter_starter/src/utils/logger.dart';
 ///
 /// Runs [https://pub.dev/packages/rename] to do so.
 class RenamingService {
-  final ProcessManager _processManager;
-
-  /// Constructor, in which manager is passed.
-  RenamingService(this._processManager);
-
   /// Runs rename-package.
   Future<void> runRename({
     required String executablePath,
@@ -20,8 +15,9 @@ class RenamingService {
     required bool isMacOSSupport,
     required bool isLinuxSupport,
   }) async {
+    final processManager = ProcessManager();
     // Initialization of 'rename' package.
-    final initProcess = await _processManager.spawn(
+    final initProcess = await processManager.spawn(
       'dart',
       [
         'pub',
@@ -50,7 +46,7 @@ class RenamingService {
       supportedPlatforms.add('linux');
     }
     final name = 'surf-flutter-app-template-main';
-    final runProcess = await _processManager.spawn(
+    final runProcess = await processManager.spawn(
       'dart',
       [
         'pub',
