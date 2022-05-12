@@ -1,18 +1,21 @@
 import 'package:surf_flutter_starter/src/services/archive_service.dart';
 import 'package:surf_flutter_starter/src/services/directory_service.dart';
 import 'package:surf_flutter_starter/src/services/network_service.dart';
+import 'package:surf_flutter_starter/src/services/renaming_service.dart';
 
 /// Repository for managing basic project template.
 class TemplateRepository {
   final NetworkService _networkService;
   final ArchiveService _archiveService;
   final DirectoryService _directoryService;
+  final RenamingService _renamingService;
 
   /// Constructor, in which services are passed.
   const TemplateRepository(
     this._networkService,
     this._archiveService,
     this._directoryService,
+    this._renamingService,
   );
 
   /// Gets project template from [templateUrl] & saves it to [savingPath].
@@ -47,5 +50,28 @@ class TemplateRepository {
     required String templatePath,
   }) {
     _directoryService.deleteFile(filePath: templatePath);
+  }
+
+  /// Renames project template file & contents.
+  ///
+  /// Using [RenamingService].
+  Future<void> renameProject({
+    required String templatePath,
+    required String projectName,
+    required String bundleId,
+    required bool isAndroidSupport,
+    required bool isIOSSupport,
+    required bool isMacOSSupport,
+    required bool isLinuxSupport,
+  }) async {
+    await _renamingService.runRename(
+      executablePath: templatePath,
+      projectName: projectName,
+      bundleId: bundleId,
+      isAndroidSupport: isAndroidSupport,
+      isIOSSupport: isIOSSupport,
+      isMacOSSupport: isMacOSSupport,
+      isLinuxSupport: isLinuxSupport,
+    );
   }
 }

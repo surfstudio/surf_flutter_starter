@@ -10,6 +10,18 @@ class Config {
   /// Url for template, which is used in project generation process.
   static const templateUrl = 'https://github.com/surfstudio/surf-flutter-app-template/archive/refs/heads/main.zip';
 
+  /// Default state of `Android` target.
+  static const defaultAndroidSupport = true;
+
+  /// Default state of `MacOs` target.
+  static const defaultIOSSupport = true;
+
+  /// Default state of `iOS` target.
+  static const defaultMacOSSupport = false;
+
+  /// Default state of `Linux` target.
+  static const defaultLinuxSupport = false;
+
   /// Directory, in which new project is created.
   final ProjectPath projectPath;
 
