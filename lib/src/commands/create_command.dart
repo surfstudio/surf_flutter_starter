@@ -3,7 +3,6 @@ import 'package:surf_flutter_starter/src/commands/base_command.dart';
 import 'package:surf_flutter_starter/src/creators/automatic_creator.dart';
 import 'package:surf_flutter_starter/src/creators/creator.dart';
 import 'package:surf_flutter_starter/src/creators/interactive_cli_creator.dart';
-import 'package:surf_flutter_starter/src/exceptions.dart';
 
 /// Creates new project.
 ///
@@ -35,16 +34,12 @@ class CreateCommand extends BaseCommand {
 
   @override
   Future<int> run() async {
-    try {
-      final hasConfigPath = argResults?['config-path'] != null && (argResults!['config-path'] as String).isNotEmpty;
-      if (hasConfigPath) {
-        await _automaticCreator.start();
-      } else {
-        await _interactiveCLICreator.start();
-      }
-      return ExitCode.success.code;
-    } on CreatorException {
-      return ExitCode.usage.code;
+    final hasConfigPath = argResults?['config-path'] != null && (argResults!['config-path'] as String).isNotEmpty;
+    if (hasConfigPath) {
+      await _automaticCreator.start();
+    } else {
+      await _interactiveCLICreator.start();
     }
+    return ExitCode.success.code;
   }
 }

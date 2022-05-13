@@ -6,10 +6,13 @@ import 'package:surf_flutter_starter/src/config/config_builder.dart';
 import 'package:surf_flutter_starter/src/creators/automatic_creator.dart';
 import 'package:surf_flutter_starter/src/creators/interactive_cli_creator.dart';
 import 'package:surf_flutter_starter/src/jobs/clone_template_job.dart';
+import 'package:surf_flutter_starter/src/jobs/extract_project_archive_job.dart';
 import 'package:surf_flutter_starter/src/jobs/get_config_cli_job.dart';
 import 'package:surf_flutter_starter/src/repositories/config_repository.dart';
 import 'package:surf_flutter_starter/src/repositories/template_repository.dart';
+import 'package:surf_flutter_starter/src/services/archive_service.dart';
 import 'package:surf_flutter_starter/src/services/dialog_service.dart';
+import 'package:surf_flutter_starter/src/services/directory_service.dart';
 import 'package:surf_flutter_starter/src/services/network_service.dart';
 import 'package:surf_flutter_starter/src/utils/logger.dart';
 import 'package:surf_flutter_starter/src/utils/terminal.dart';
@@ -36,6 +39,8 @@ class StarterCommandRunner extends CommandRunner<int> {
     // TODO(taranov): should we implement DI system?
     // Services:
     final _networkService = DioService(Dio());
+    final _archiveService = ZipArchiveService();
+    final _directoryService = IODirectoryService();
 
     // Repositories:
     final _configRepository = ConfigRepository(
@@ -44,16 +49,22 @@ class StarterCommandRunner extends CommandRunner<int> {
       ),
       MinimalConfigBuilder(),
     );
-    final _templateRepository = TemplateRepository(_networkService);
+    final _templateRepository = TemplateRepository(
+      _networkService,
+      _archiveService,
+      _directoryService,
+    );
 
     // Jobs:
     final _getConfigCLIJob = GetConfigCLIJob(_configRepository);
     final _cloneTemplateJob = CloneTemplateJob(_templateRepository);
+    final _extractProjectArchiveJob = ExtractProjectArchiveJob(_templateRepository);
     <Command<int>>[
       CreateCommand(
         InteractiveCLICreator(
           _getConfigCLIJob,
           _cloneTemplateJob,
+          _extractProjectArchiveJob,
         ),
         AutomaticCreator(),
       ),

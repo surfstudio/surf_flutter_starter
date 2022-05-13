@@ -24,7 +24,7 @@ class DioService implements NetworkService {
   @override
   Future<void> download({required String url, required String path}) async {
     try {
-      Logger.fine(path);
+      Logger.info('Downloading from $url to $path');
       final result = await dio.download(url, path);
       if (result.statusCode == null || result.statusCode! >= 300) {
         Logger.error(result.data.toString());

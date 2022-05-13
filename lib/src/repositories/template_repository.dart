@@ -1,17 +1,21 @@
-import 'package:surf_flutter_starter/src/exceptions.dart';
+import 'package:surf_flutter_starter/src/services/archive_service.dart';
+import 'package:surf_flutter_starter/src/services/directory_service.dart';
 import 'package:surf_flutter_starter/src/services/network_service.dart';
-import 'package:surf_flutter_starter/src/utils/logger.dart';
 
 /// Repository for managing basic project template.
 class TemplateRepository {
   final NetworkService _networkService;
+  final ArchiveService _archiveService;
+  final DirectoryService _directoryService;
 
   /// Constructor, in which services are passed.
   const TemplateRepository(
     this._networkService,
+    this._archiveService,
+    this._directoryService,
   );
 
-  /// Gets project [templateUrl] & saves it to [savingPath].
+  /// Gets project template from [templateUrl] & saves it to [savingPath].
   ///
   /// Downloads template as zip-archive, using [NetworkService.download].
   Future<void> fetchTemplateToDirectory({
@@ -19,14 +23,29 @@ class TemplateRepository {
     required String savingPath,
     required String templateName,
   }) async {
-    try {
-      await _networkService.download(
-        url: templateUrl,
-        path: '$savingPath\\$templateName.zip',
-      );
-    } on NetworkException catch (e) {
-      logger.stderr(e.toString());
-      throw RepositoryException(e.toString());
-    }
+    await _networkService.download(
+      url: templateUrl,
+      path: '$savingPath\\$templateName.zip',
+    );
+  }
+
+  /// Extracts project template from [archiveInputPath] to [templateOutputPath].
+  ///
+  /// Extracts archive via [ArchiveService.extractArchive].
+  Future<void> extractTemplateFromArchive({
+    required String archiveInputPath,
+    required String templateOutputPath,
+  }) async {
+    await _archiveService.extractArchive(
+      inputPath: archiveInputPath,
+      outputPath: templateOutputPath,
+    );
+  }
+
+  /// Deletes template archive from Disc.
+  void deleteTemplateArchive({
+    required String templatePath,
+  }) {
+    _directoryService.deleteFile(filePath: templatePath);
   }
 }
