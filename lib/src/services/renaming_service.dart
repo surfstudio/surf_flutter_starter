@@ -14,6 +14,7 @@ class RenamingService {
   Future<void> runRename({
     required String executablePath,
     required String projectName,
+    required String appLabel,
     required String bundleId,
     required bool isAndroidSupport,
     required bool isIOSSupport,
@@ -58,7 +59,7 @@ class RenamingService {
         'run',
         'rename',
         '--appname',
-        projectName,
+        appLabel,
         '--bundleId',
         bundleId,
         '--target',

@@ -35,6 +35,15 @@ class ProjectName extends ConfigParameter<String?> {
   const ProjectName(String? value) : super(value);
 }
 
+/// Application Label (name) of project, that is going to be created.
+class AppLabel extends ConfigParameter<String?> {
+  @override
+  bool get isValid => value != null && value!.isNotEmpty;
+
+  /// Constructor, in which appID [value] is passed.
+  const AppLabel(String? value) : super(value);
+}
+
 /// Application ID of project, that is going to be created.
 class AppID extends ConfigParameter<String?> {
   @override

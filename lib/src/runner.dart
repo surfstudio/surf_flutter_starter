@@ -46,7 +46,7 @@ class StarterCommandRunner extends CommandRunner<int> {
     final _archiveService = ZipArchiveService();
     final _directoryService = IODirectoryService();
     final _renamingService = RenamingService(ProcessManager(
-      stdin: stdin,
+      stdin: stdin.asBroadcastStream(),
       stdout: stdout,
       stderr: stderr,
     ));

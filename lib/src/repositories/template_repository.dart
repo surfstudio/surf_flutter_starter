@@ -58,6 +58,7 @@ class TemplateRepository {
   Future<void> renameProject({
     required String templatePath,
     required String projectName,
+    required String appLabel,
     required String bundleId,
     required bool isAndroidSupport,
     required bool isIOSSupport,
@@ -67,6 +68,7 @@ class TemplateRepository {
     await _renamingService.runRename(
       executablePath: templatePath,
       projectName: projectName,
+      appLabel: appLabel,
       bundleId: bundleId,
       isAndroidSupport: isAndroidSupport,
       isIOSSupport: isIOSSupport,

@@ -18,6 +18,7 @@ class RenameProjectJob extends ConfigurableJob {
     await _templateRepository.renameProject(
       templatePath: config.projectPath.value!,
       projectName: config.projectName.value!,
+      appLabel: config.appLabel.value!,
       bundleId: config.appID.value!,
       isAndroidSupport: Config.defaultAndroidSupport,
       isIOSSupport: Config.defaultIOSSupport,
