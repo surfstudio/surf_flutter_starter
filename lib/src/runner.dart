@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:args/command_runner.dart';
 import 'package:dio/dio.dart';
 import 'package:io/io.dart';
@@ -45,11 +43,7 @@ class StarterCommandRunner extends CommandRunner<int> {
     final _networkService = DioService(Dio());
     final _archiveService = ZipArchiveService();
     final _directoryService = IODirectoryService();
-    final _renamingService = RenamingService(ProcessManager(
-      stdin: stdin.asBroadcastStream(),
-      stdout: stdout,
-      stderr: stderr,
-    ));
+    final _renamingService = RenamingService(_directoryService);
 
     // Repositories:
     final _configRepository = ConfigRepository(

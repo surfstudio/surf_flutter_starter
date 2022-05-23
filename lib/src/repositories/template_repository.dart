@@ -65,15 +65,21 @@ class TemplateRepository {
     required bool isMacOSSupport,
     required bool isLinuxSupport,
   }) async {
-    await _renamingService.runRename(
-      executablePath: templatePath,
-      projectName: projectName,
-      appLabel: appLabel,
-      bundleId: bundleId,
-      isAndroidSupport: isAndroidSupport,
-      isIOSSupport: isIOSSupport,
-      isMacOSSupport: isMacOSSupport,
-      isLinuxSupport: isLinuxSupport,
-    );
+    if (isAndroidSupport) {
+      await _renamingService.renameAndroid(
+        executablePath: templatePath,
+        projectName: projectName,
+        appLabel: appLabel,
+        bundleId: bundleId,
+      );
+    }
+    if (isIOSSupport) {
+      await _renamingService.renameIOS(
+        executablePath: templatePath,
+        projectName: projectName,
+        appLabel: appLabel,
+        bundleId: bundleId,
+      );
+    }
   }
 }

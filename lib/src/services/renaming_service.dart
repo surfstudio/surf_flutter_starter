@@ -1,76 +1,93 @@
-import 'package:io/io.dart';
+import 'package:surf_flutter_starter/src/config/config_parameter.dart';
+import 'package:surf_flutter_starter/src/services/directory_service.dart';
 import 'package:surf_flutter_starter/src/utils/logger.dart';
+
+import '../constants.dart';
 
 /// Renames project files & content.
 ///
 /// Runs [https://pub.dev/packages/rename] to do so.
 class RenamingService {
-  final ProcessManager _processManager;
+  final DirectoryService _directoryService;
 
-  /// Constructor, in which [ProcessManager] is passed.
-  const RenamingService(this._processManager);
+  /// Constructor, in which [DirectoryService] is passed.
+  const RenamingService(this._directoryService);
 
-  /// Runs rename-package.
-  Future<void> runRename({
+  static const _androidMainManifestPath = '$templateProjectNameMain\\android\\app\\src\\main\\AndroidManifest.xml';
+  static const _androidDebugManifestPath = '$templateProjectNameMain\\android\\app\\src\\debug\\AndroidManifest.xml';
+  static const _androidProfileManifestPath = '$templateProjectNameMain\\android\\app\\src\\debug\\AndroidManifest.xml';
+  static const _androidAppGradlePath = '$templateProjectNameMain\\android\\app\\build.gradle';
+
+  static const _oldPackageID = AppID.defaultPackageID;
+  static const _oldAppID = AppID.defaultAppID;
+  static const _oldAppLabel = AppLabel.defaultAppLabel;
+
+  static const _oldKotlinPath =
+      '$templateProjectNameMain\\android\\app\\src\\main\\kotlin\\com\\example\\flutter_template\\MainActivity.kt';
+
+  static const _iosInfoPlistPath = '$templateProjectNameMain\\ios\\Runner\\Info.plist';
+
+  /// Renames all android-specific files & contents.
+  ///
+  /// project\android\...
+  Future<void> renameAndroid({
     required String executablePath,
     required String projectName,
     required String appLabel,
     required String bundleId,
-    required bool isAndroidSupport,
-    required bool isIOSSupport,
-    required bool isMacOSSupport,
-    required bool isLinuxSupport,
   }) async {
-    // Initialization of 'rename' package.
-    final initProcess = await _processManager.spawn(
-      'dart',
-      [
-        'pub',
-        'global',
-        'activate',
-        'rename',
-      ],
-      workingDirectory: executablePath,
-    );
+    // Step 1. Rename Main Manifest.
+    String mainManifestContent =
+        _directoryService.readFileAsString(filePath: '$executablePath\\$_androidMainManifestPath');
+    mainManifestContent = mainManifestContent.replaceAll(_oldPackageID, bundleId);
+    mainManifestContent = mainManifestContent.replaceAll(_oldAppLabel, appLabel);
+    _directoryService.updateFile(filePath: '$executablePath\\$_androidMainManifestPath', content: mainManifestContent);
+    // Step 2. Rename Debug Manifest.
+    String debugManifestContent =
+        _directoryService.readFileAsString(filePath: '$executablePath\\$_androidDebugManifestPath');
+    debugManifestContent = debugManifestContent.replaceAll(_oldPackageID, bundleId);
+    _directoryService.updateFile(
+        filePath: '$executablePath\\$_androidDebugManifestPath', content: debugManifestContent);
+    // Step 3. Rename Profile Manifest.
+    String profileManifestContent =
+        _directoryService.readFileAsString(filePath: '$executablePath\\$_androidProfileManifestPath');
+    profileManifestContent = profileManifestContent.replaceAll(_oldPackageID, bundleId);
+    _directoryService.updateFile(
+        filePath: '$executablePath\\$_androidProfileManifestPath', content: profileManifestContent);
+    // Step 4. Rename app\build.gradle.
+    String gradleContent = _directoryService.readFileAsString(filePath: '$executablePath\\$_androidAppGradlePath');
+    gradleContent = gradleContent.replaceAll(_oldAppID, bundleId);
+    _directoryService.updateFile(filePath: '$executablePath\\$_androidAppGradlePath', content: gradleContent);
+    // Step 5. Rename Kotlin MainActivity file.
+    String kotlinContent = _directoryService.readFileAsString(filePath: '$executablePath\\$_oldKotlinPath');
+    kotlinContent = kotlinContent.replaceAll(_oldPackageID, bundleId);
 
-    final initExitCode = await initProcess.exitCode;
-    Logger.fine('Renaming service. InitExitCode: $initExitCode');
+    final newKotlinPath =
+        '$executablePath\\$templateProjectNameMain\\android\\app\\src\\main\\kotlin\\${_getPathFromBundle(bundleId)}';
+    await _directoryService.createFile(filePath: newKotlinPath, fileName: 'MainActivity.kt', isRecursive: true);
+    String newKotlinContent = _directoryService.readFileAsString(filePath: '$newKotlinPath\\MainActivity.kt');
+    newKotlinContent = kotlinContent;
+    _directoryService.updateFile(filePath: '$newKotlinPath\\MainActivity.kt', content: newKotlinContent);
 
-    // Running 'rename' package.
-    final supportedPlatforms = <String>[];
-    if (isAndroidSupport) {
-      supportedPlatforms.add('android');
-    }
-    if (isIOSSupport) {
-      supportedPlatforms.add('ios');
-    }
-    if (isMacOSSupport) {
-      supportedPlatforms.add('macOS');
-    }
-    if (isLinuxSupport) {
-      supportedPlatforms.add('linux');
-    }
-    final name = 'surf-flutter-app-template-main';
-    final runProcess = await _processManager.spawn(
-      'dart',
-      [
-        'pub',
-        'global',
-        'run',
-        'rename',
-        '--appname',
-        appLabel,
-        '--bundleId',
-        bundleId,
-        '--target',
-        ...supportedPlatforms,
-      ],
-      workingDirectory: '$executablePath\\$name',
-    );
+    Logger.fine('Android renaming complete!');
+  }
 
-    final runExitCode = await runProcess.exitCode;
-    Logger.fine('Renaming service. RunExitCode: $runExitCode');
+  /// Renames all iOS-specific files & contents.
+  ///
+  /// project\ios\...
+  Future<void> renameIOS({
+    required String executablePath,
+    required String projectName,
+    required String appLabel,
+    required String bundleId,
+  }) async {
+    String infoPlistContent = _directoryService.readFileAsString(filePath: '$executablePath\\$_iosInfoPlistPath');
+    infoPlistContent = infoPlistContent.replaceAll(_oldPackageID, bundleId);
+    infoPlistContent = infoPlistContent.replaceAll(_oldAppLabel, appLabel);
+    _directoryService.updateFile(filePath: '$executablePath\\$_iosInfoPlistPath', content: infoPlistContent);
+  }
 
-    return;
+  String _getPathFromBundle(String bundleId) {
+    return bundleId.replaceAll('.', '\\');
   }
 }

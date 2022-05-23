@@ -37,6 +37,8 @@ class ProjectName extends ConfigParameter<String?> {
 
 /// Application Label (name) of project, that is going to be created.
 class AppLabel extends ConfigParameter<String?> {
+  /// Default value of [AppLabel].
+  static const defaultAppLabel = 'flutter_template';
   @override
   bool get isValid => value != null && value!.isNotEmpty;
 
@@ -46,6 +48,11 @@ class AppLabel extends ConfigParameter<String?> {
 
 /// Application ID of project, that is going to be created.
 class AppID extends ConfigParameter<String?> {
+  /// Default value of [AppID].
+  static const defaultPackageID = 'com.example.flutter_template';
+
+  /// Default value of [AppID] (variant).
+  static const defaultAppID = 'ru.surfstudio.flutterTemplate';
   @override
   bool get isValid => value != null && value!.isNotEmpty;
 
