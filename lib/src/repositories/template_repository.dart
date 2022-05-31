@@ -65,6 +65,10 @@ class TemplateRepository {
     required bool isMacOSSupport,
     required bool isLinuxSupport,
   }) async {
+    await _renamingService.renameProject(
+      executablePath: templatePath,
+      projectName: projectName,
+    );
     if (isAndroidSupport) {
       await _renamingService.renameAndroid(
         executablePath: templatePath,
