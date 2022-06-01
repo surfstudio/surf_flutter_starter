@@ -6,8 +6,14 @@ abstract class DialogService {
   /// Gets user's raw input.
   ///
   /// Firstly, prints [userPrompt], so that user can provide their input.
-  /// Returns user's response as 'String'.
+  /// Returns user's response as `String`.
   String getUserInput({required String userPrompt});
+
+  /// Gets user's answer to (Y/N).
+  ///
+  /// Firstly, prints [userPrompt], so that user can provide their input.
+  /// Returns user's response as `bool`.
+  bool isYesInput({required String userPrompt});
 }
 
 /// Implementation of [DialogService], based on [Terminal]'s IO.
@@ -22,5 +28,12 @@ class TerminalDialogService implements DialogService {
     Logger.info(userPrompt);
     final input = _terminal.getUserInput()!;
     return input;
+  }
+
+  @override
+  bool isYesInput({required String userPrompt}) {
+    Logger.info(userPrompt);
+    final input = _terminal.getUserInput()!;
+    return input.toLowerCase().trim() == 'y';
   }
 }
