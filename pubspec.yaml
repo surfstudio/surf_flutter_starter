@@ -1,7 +1,7 @@
 name: surf_flutter_starter
 description: CLI-tool for creating new Flutter projects, based on surf-flutter-app-template
 version: 0.0.1
-homepage: ''
+homepage: 'https://github.com/surfstudio'
 
 environment:
   sdk: ">=2.16.1 <3.0.0"
