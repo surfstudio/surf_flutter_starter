@@ -10,7 +10,7 @@ $ dart pub global activate surf_flutter_starter
 and then run
 
 ```sh
-$ dart pub global activate surf_flutter_starter
+$ dart pub surf_flutter_starter create
 ```
 
 Dialog prompts will appear to follow project creation process.
