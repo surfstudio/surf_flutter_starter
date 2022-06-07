@@ -2,6 +2,7 @@ import 'package:surf_flutter_starter/src/services/archive_service.dart';
 import 'package:surf_flutter_starter/src/services/directory_service.dart';
 import 'package:surf_flutter_starter/src/services/network_service.dart';
 import 'package:surf_flutter_starter/src/services/renaming_service.dart';
+import 'package:surf_flutter_starter/src/utils/replace_path_separators_x.dart';
 
 /// Repository for managing basic project template.
 class TemplateRepository {
@@ -28,7 +29,7 @@ class TemplateRepository {
   }) async {
     await _networkService.download(
       url: templateUrl,
-      path: '$savingPath\\$templateName.zip',
+      path: '$savingPath\\$templateName.zip'.replacePathSeparators(),
     );
   }
 

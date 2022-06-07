@@ -4,9 +4,9 @@ import 'package:surf_flutter_starter/src/config/config.dart';
 import 'package:surf_flutter_starter/src/config/config_builder.dart';
 import 'package:surf_flutter_starter/src/config/config_parameter.dart';
 import 'package:surf_flutter_starter/src/services/dialog_service.dart';
+import 'package:surf_flutter_starter/src/utils/replace_path_separators_x.dart';
 
 const _createInCurrentPrompt = 'Do yoy want to create project in current directory? (Y/N)';
-const _projectPathPrompt = 'Please, type in path to project (C:\\path\\to\\project):';
 const _projectNamePrompt = 'Please, type in project name (like_this):';
 const _appLabelPrompt = 'Please, type in app name (label). Something like (App Name):';
 const _appIDPrompt = 'Please, type in app ID (com.example.id):';
@@ -15,6 +15,8 @@ const _appIDPrompt = 'Please, type in app ID (com.example.id):';
 class ConfigRepository {
   final DialogService _dialogService;
   final ConfigBuilder _configBuilder;
+
+  final _projectPathPrompt = 'Please, type in path to project (C:\\path\\to\\project):'.replacePathSeparators();
 
   /// Constructor, in which services are passed.
   ConfigRepository(
