@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:surf_flutter_starter/src/utils/logger.dart';
+import 'package:surf_flutter_starter/src/utils/replace_path_separators_x.dart';
 
 /// Interface for basic directories operations.
 abstract class DirectoryService {
@@ -58,7 +59,8 @@ class IODirectoryService implements DirectoryService {
   }) async {
     Logger.info('Creating file to $filePath');
     await Directory(filePath).create(recursive: isRecursive);
-    await File('$filePath\\$fileName').create(recursive: isRecursive);
+    await File('$filePath\\$fileName'.replacePathSeparators())
+        .create(recursive: isRecursive);
   }
 
   @override
@@ -86,7 +88,8 @@ class IODirectoryService implements DirectoryService {
     Logger.info('Updating directory content from $directoryPath to $newName');
     final directory = Directory(directoryPath);
     // Rename old directory to new one.
-    final newPath = directoryPath.replaceRange(directoryPath.lastIndexOf('\\') + 1, directoryPath.length, newName);
+    final newPath = directoryPath.replaceRange(
+        directoryPath.lastIndexOf('\\') + 1, directoryPath.length, newName);
     directory.renameSync(newPath);
   }
 
@@ -96,12 +99,14 @@ class IODirectoryService implements DirectoryService {
     required String oldValue,
     required String newValue,
   }) {
-    Logger.info('Updating all files contents from $directoryPath value $oldValue to $newValue');
+    Logger.info(
+        'Updating all files contents from $directoryPath value $oldValue to $newValue');
     final directory = Directory(directoryPath);
 
     for (final file in directory.listSync(recursive: true).whereType<File>()) {
       if (!file.path.contains('.png')) {
-        final newFileContent = file.readAsStringSync().replaceAll(oldValue, newValue);
+        final newFileContent =
+            file.readAsStringSync().replaceAll(oldValue, newValue);
         file.writeAsStringSync(newFileContent);
       }
     }
