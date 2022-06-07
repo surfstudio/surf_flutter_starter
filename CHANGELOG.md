@@ -1,4 +1,7 @@
 # Changelog
+## 0.0.3
+### Fixed
+* different path separators for various OS;
 
 ## 0.0.2
 ### Changed
