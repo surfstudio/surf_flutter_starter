@@ -1,4 +1,8 @@
 # Changelog
+## 0.0.4
+### Fixed
+* replace lost separator for main kotlin file;
+
 ## 0.0.3
 ### Fixed
 * different path separators for various OS;
