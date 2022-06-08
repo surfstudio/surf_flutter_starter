@@ -48,7 +48,8 @@ Usage: surf_flutter_starter create
 ```
 
 ## CLI Architecture
-![Project Diagram](images/CLI-Project-Generator Structure.png)
+<img src="https://github.com/surfstudio/surf_flutter_starter/blob/main/images/CLI-Project-Generator-Structure.png" width="740">
+
 
 ### Jobs
 Regular Job:
