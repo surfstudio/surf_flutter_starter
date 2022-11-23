@@ -50,7 +50,9 @@ class TemplateRepository {
   void deleteTemplateArchive({
     required String templatePath,
   }) {
-    _directoryService.deleteFile(filePath: templatePath);
+    if (_directoryService.doesFileExist(directoryPath: templatePath)) {
+      _directoryService.deleteFile(filePath: templatePath);
+    }
   }
 
   /// Renames project template file & contents.
