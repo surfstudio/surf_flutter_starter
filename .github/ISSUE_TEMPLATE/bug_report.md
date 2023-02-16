@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Something is wrong with Flutter Virtual Keyboard.
+about: Something is wrong with Surf Flutter Template.
 title: "[BUG] "
 labels: bug
 ---
