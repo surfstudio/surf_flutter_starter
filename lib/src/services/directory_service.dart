@@ -47,6 +47,11 @@ abstract class DirectoryService {
   void deleteDirectory({
     required String directoryPath,
   });
+
+  /// Returns 'true' if file exists in [directoryPath].
+  bool doesFileExist({
+    required String directoryPath,
+  });
 }
 
 /// Implementation of [DirectoryService], using dart:io.
@@ -59,8 +64,7 @@ class IODirectoryService implements DirectoryService {
   }) async {
     Logger.info('Creating file to $filePath');
     await Directory(filePath).create(recursive: isRecursive);
-    await File('$filePath\\$fileName'.replacePathSeparators())
-        .create(recursive: isRecursive);
+    await File('$filePath\\$fileName'.replacePathSeparators()).create(recursive: isRecursive);
   }
 
   @override
@@ -89,7 +93,10 @@ class IODirectoryService implements DirectoryService {
     final directory = Directory(directoryPath);
     // Rename old directory to new one.
     final newPath = directoryPath.replaceRange(
-        directoryPath.lastIndexOf('\\') + 1, directoryPath.length, newName);
+      directoryPath.lastIndexOf('\\') + 1,
+      directoryPath.length,
+      newName,
+    );
     directory.renameSync(newPath);
   }
 
@@ -99,14 +106,12 @@ class IODirectoryService implements DirectoryService {
     required String oldValue,
     required String newValue,
   }) {
-    Logger.info(
-        'Updating all files contents from $directoryPath value $oldValue to $newValue');
+    Logger.info('Updating all files contents from $directoryPath value $oldValue to $newValue');
     final directory = Directory(directoryPath);
 
     for (final file in directory.listSync(recursive: true).whereType<File>()) {
       if (!file.path.contains('.png')) {
-        final newFileContent =
-            file.readAsStringSync().replaceAll(oldValue, newValue);
+        final newFileContent = file.readAsStringSync().replaceAll(oldValue, newValue);
         file.writeAsStringSync(newFileContent);
       }
     }
@@ -124,5 +129,12 @@ class IODirectoryService implements DirectoryService {
     Logger.info('Deleting directory from $directoryPath');
     final directory = Directory(directoryPath);
     directory.deleteSync(recursive: true);
+  }
+
+  @override
+  bool doesFileExist({required String directoryPath}) {
+    Logger.info('Checking file in $directoryPath');
+    final file = File(directoryPath);
+    return file.existsSync();
   }
 }
