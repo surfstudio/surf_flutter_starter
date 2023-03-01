@@ -14,11 +14,6 @@ class RenamingService {
   /// Constructor, in which [DirectoryService] is passed.
   RenamingService(this._directoryService);
 
-  final _androidMainManifestPath = 'android\\app\\src\\main\\AndroidManifest.xml'.replacePathSeparators();
-  final _androidDebugManifestPath = 'android\\app\\src\\debug\\AndroidManifest.xml'.replacePathSeparators();
-  final _androidProfileManifestPath = 'android\\app\\src\\debug\\AndroidManifest.xml'.replacePathSeparators();
-  final _androidAppGradlePath = 'android\\app\\build.gradle';
-
   final _oldPackageID = AppID.defaultPackageID;
   final _oldAppID = AppID.defaultAppID;
   final _oldAppLabel = AppLabel.defaultAppLabel;
@@ -61,29 +56,29 @@ class RenamingService {
     // Step 1. Rename Main Manifest.
     final fullPath = '$executablePath\\$projectName'.replacePathSeparators();
     String mainManifestContent =
-        _directoryService.readFileAsString(filePath: '$fullPath\\$_androidMainManifestPath'.replacePathSeparators());
+        _directoryService.readFileAsString(filePath: '$fullPath\\${ProjectPath.androidMainManifestPath}'.replacePathSeparators());
     mainManifestContent = mainManifestContent.replaceAll(_oldPackageID, bundleId);
     mainManifestContent = mainManifestContent.replaceAll(_oldAppLabel, appLabel);
     _directoryService.updateFile(
-        filePath: '$fullPath\\$_androidMainManifestPath'.replacePathSeparators(), content: mainManifestContent);
+        filePath: '$fullPath\\${ProjectPath.androidMainManifestPath}'.replacePathSeparators(), content: mainManifestContent);
     // Step 2. Rename Debug Manifest.
     String debugManifestContent =
-        _directoryService.readFileAsString(filePath: '$fullPath\\$_androidDebugManifestPath'.replacePathSeparators());
+        _directoryService.readFileAsString(filePath: '$fullPath\\${ProjectPath.androidDebugManifestPath}'.replacePathSeparators());
     debugManifestContent = debugManifestContent.replaceAll(_oldPackageID, bundleId);
     _directoryService.updateFile(
-        filePath: '$fullPath\\$_androidDebugManifestPath'.replacePathSeparators(), content: debugManifestContent);
+        filePath: '$fullPath\\${ProjectPath.androidDebugManifestPath}'.replacePathSeparators(), content: debugManifestContent);
     // Step 3. Rename Profile Manifest.
     String profileManifestContent =
-        _directoryService.readFileAsString(filePath: '$fullPath\\$_androidProfileManifestPath'.replacePathSeparators());
+        _directoryService.readFileAsString(filePath: '$fullPath\\${ProjectPath.androidProfileManifestPath}'.replacePathSeparators());
     profileManifestContent = profileManifestContent.replaceAll(_oldPackageID, bundleId);
     _directoryService.updateFile(
-        filePath: '$fullPath\\$_androidProfileManifestPath'.replacePathSeparators(), content: profileManifestContent);
+        filePath: '$fullPath\\${ProjectPath.androidProfileManifestPath}'.replacePathSeparators(), content: profileManifestContent);
     // Step 4. Rename app\build.gradle.
     String gradleContent =
-        _directoryService.readFileAsString(filePath: '$fullPath\\$_androidAppGradlePath'.replacePathSeparators());
+        _directoryService.readFileAsString(filePath: '$fullPath\\${ProjectPath.androidAppGradlePath}'.replacePathSeparators());
     gradleContent = gradleContent.replaceAll(_oldAppID, bundleId);
     _directoryService.updateFile(
-        filePath: '$fullPath\\$_androidAppGradlePath'.replacePathSeparators(), content: gradleContent);
+        filePath: '$fullPath\\${ProjectPath.androidAppGradlePath}'.replacePathSeparators(), content: gradleContent);
     // Step 5. Rename Kotlin MainActivity file.
     String kotlinContent =
         _directoryService.readFileAsString(filePath: '$fullPath\\$_oldKotlinPath'.replacePathSeparators());

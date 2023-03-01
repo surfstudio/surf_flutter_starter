@@ -1,4 +1,5 @@
 import 'package:surf_flutter_starter/src/config/config.dart';
+import 'package:surf_flutter_starter/src/utils/replace_path_separators_x.dart';
 
 /// Single user-specified [ConfigParameter] for [Config].
 abstract class ConfigParameter<T extends Object?> {
@@ -19,6 +20,15 @@ abstract class ConfigParameter<T extends Object?> {
 
 /// Directory path, in which project is going to be created.
 class ProjectPath extends ConfigParameter<String?> {
+  //Default path to main manifest.
+  static final androidMainManifestPath = 'android\\app\\src\\main\\AndroidManifest.xml'.replacePathSeparators();
+  //Default path to debug manifest.
+  static final androidDebugManifestPath = 'android\\app\\src\\debug\\AndroidManifest.xml'.replacePathSeparators();
+  //Default path to profile manifest.
+  static final androidProfileManifestPath = 'android\\app\\src\\debug\\AndroidManifest.xml'.replacePathSeparators();
+  //Default path to graddle manifest.
+  static const androidAppGradlePath = 'android\\app\\build.gradle';
+
   @override
   bool get isValid => value != null && value!.isNotEmpty;
 
@@ -49,10 +59,10 @@ class AppLabel extends ConfigParameter<String?> {
 /// Application ID of project, that is going to be created.
 class AppID extends ConfigParameter<String?> {
   /// Default value of [AppID].
-  static const defaultPackageID = 'com.example.flutter_template';
+  static const defaultPackageID = 'dev.surf.flutter_template';
 
   /// Default value of [AppID] (variant).
-  static const defaultAppID = 'ru.surfstudio.flutterTemplate';
+  static const defaultAppID = 'dev.surf.flutter_template';
   @override
   bool get isValid => value != null && value!.isNotEmpty;
 
