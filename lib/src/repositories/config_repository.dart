@@ -16,7 +16,8 @@ class ConfigRepository {
   final DialogService _dialogService;
   final ConfigBuilder _configBuilder;
 
-  final _projectPathPrompt = 'Enter path to project (C:\\path\\to\\project):'.replacePathSeparators();
+  final _projectPathPrompt =
+      'Enter path to project (C:\\path\\to\\project):'.replacePathSeparators();
 
   /// Constructor, in which services are passed.
   ConfigRepository(
@@ -49,8 +50,8 @@ class ConfigRepository {
   }
 
   String _getProjectPath() {
-    final isInCurrentDirectory =
-        _dialogService.isYesInput(userPrompt: '$_createInCurrentPrompt \n${Directory.current.path}');
+    final isInCurrentDirectory = _dialogService.isYesInput(
+        userPrompt: '$_createInCurrentPrompt \n${Directory.current.path}');
     if (isInCurrentDirectory) {
       return Directory.current.path;
     }

@@ -120,7 +120,7 @@ class IODirectoryService implements DirectoryService {
     for (final file in directory.listSync(recursive: true).whereType<File>()) {
       if (!file.path.contains('.png')) {
         String newFileContent = file.readAsStringSync();
-        if(!ignoredFiles.contains(file.path)) {
+        if (!ignoredFiles.contains(file.path)) {
           newFileContent = newFileContent.replaceAll(oldValue, newValue);
         }
         file.writeAsStringSync(newFileContent);

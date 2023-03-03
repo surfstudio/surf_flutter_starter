@@ -8,7 +8,8 @@ import 'package:surf_flutter_starter/src/config/config_parameter.dart';
 /// whilst interacting with CLI.
 class Config {
   /// Url for template, which is used in project generation process.
-  static const templateUrl = 'https://github.com/surfstudio/surf-flutter-app-template/archive/refs/heads/main.zip';
+  static const templateUrl =
+      'https://github.com/surfstudio/surf-flutter-app-template/archive/refs/heads/main.zip';
 
   /// Default state of `Android` target.
   static const defaultAndroidSupport = true;

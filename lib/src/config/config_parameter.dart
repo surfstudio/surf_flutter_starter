@@ -20,14 +20,30 @@ abstract class ConfigParameter<T extends Object?> {
 
 /// Directory path, in which project is going to be created.
 class ProjectPath extends ConfigParameter<String?> {
-  //Default path to main manifest.
-  static final androidMainManifestPath = 'android\\app\\src\\main\\AndroidManifest.xml'.replacePathSeparators();
-  //Default path to debug manifest.
-  static final androidDebugManifestPath = 'android\\app\\src\\debug\\AndroidManifest.xml'.replacePathSeparators();
-  //Default path to profile manifest.
-  static final androidProfileManifestPath = 'android\\app\\src\\debug\\AndroidManifest.xml'.replacePathSeparators();
-  //Default path to graddle manifest.
+  /// Default path to gradle manifest.
   static const androidAppGradlePath = 'android\\app\\build.gradle';
+
+  /// Default path to main manifest.
+  static const androidMainManifestPath = 'android\\app\\src\\main\\AndroidManifest.xml';
+
+  /// Default path to debug manifest.
+  static const androidDebugManifestPath = 'android\\app\\src\\debug\\AndroidManifest.xml';
+
+  /// Default path to profile manifest.
+  static const androidProfileManifestPath = 'android\\app\\src\\profile\\AndroidManifest.xml';
+
+  /// Path to kotlin activity class.
+  static const oldKotlinPath =
+      'android\\app\\src\\main\\kotlin\\com\\example\\flutter_template\\MainActivity.kt';
+
+  /// Path to package id.
+  static const oldIDPath = 'android\\app\\src\\main\\kotlin\\com\\example';
+
+  /// Path to Plist.
+  static const iosInfoPlistPath = 'ios\\Runner\\Info.plist';
+
+  /// Path to ios common.
+  static const iosCommonPath = 'ios\\Flutter\\common.xcconfig';
 
   @override
   bool get isValid => value != null && value!.isNotEmpty;
