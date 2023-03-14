@@ -74,28 +74,30 @@ void main() {
   group('renameProject', () {
     test('should rename project directory and files', () async {
       when(() => directoryService.updateDirectory(
-              directoryPath: '$testExePath\\$projectName'
-                  .replacePathSeparators(),
-              newName: projectName,))
-          .thenAnswer((_) {});
+            directoryPath: '$testExePath\\$projectName'.replacePathSeparators(),
+            newName: projectName,
+          )).thenAnswer((_) {});
       when(() => directoryService.updateAllFiles(
-              directoryPath: '$testExePath\\$projectName'
-                  .replacePathSeparators(),
-              oldValue: AppLabel.defaultAppLabel,
-              newValue: projectName,))
-          .thenAnswer((_) {});
+            directoryPath: '$testExePath\\$projectName'.replacePathSeparators(),
+            oldValue: AppLabel.defaultAppLabel,
+            newValue: projectName,
+          )).thenAnswer((_) {});
 
       await renamingService.renameProject(
-          executablePath: testExePath, projectName: projectName,);
+        executablePath: testExePath,
+        projectName: projectName,
+      );
 
       verify(() => directoryService.updateDirectory(
-              directoryPath: '$testExePath\\$templateProjectNameMain'
-                  .replacePathSeparators(),
-              newName: projectName,));
+            directoryPath: '$testExePath\\$templateProjectNameMain'
+                .replacePathSeparators(),
+            newName: projectName,
+          ));
       verify(() => directoryService.updateAllFiles(
-              directoryPath: '$testExePath\\$projectName'.replacePathSeparators(),
-              oldValue: AppLabel.defaultAppLabel,
-              newValue: projectName,));
+            directoryPath: '$testExePath\\$projectName'.replacePathSeparators(),
+            oldValue: AppLabel.defaultAppLabel,
+            newValue: projectName,
+          ));
     });
   });
 

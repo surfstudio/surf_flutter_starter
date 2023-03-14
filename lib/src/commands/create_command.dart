@@ -15,7 +15,8 @@ class CreateCommand extends BaseCommand {
   final AutomaticCreator _automaticCreator;
 
   @override
-  String get description => 'Creates new Flutter project based on Surf project template';
+  String get description =>
+      'Creates new Flutter project based on Surf project template';
 
   @override
   String get name => 'create';
@@ -34,8 +35,8 @@ class CreateCommand extends BaseCommand {
 
   @override
   Future<int> run() async {
-    final hasConfigPath =
-        argResults?['config-path'] != null && (argResults!['config-path'] as String).isNotEmpty;
+    final hasConfigPath = argResults?['config-path'] != null &&
+        (argResults!['config-path'] as String).isNotEmpty;
     if (hasConfigPath) {
       await _automaticCreator.start();
     } else {

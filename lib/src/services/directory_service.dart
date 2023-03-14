@@ -65,7 +65,8 @@ class IODirectoryService implements DirectoryService {
   }) async {
     Logger.info('Creating file to $filePath');
     await Directory(filePath).create(recursive: isRecursive);
-    await File('$filePath\\$fileName'.replacePathSeparators()).create(recursive: isRecursive);
+    await File('$filePath\\$fileName'.replacePathSeparators())
+        .create(recursive: isRecursive);
   }
 
   @override
@@ -108,13 +109,18 @@ class IODirectoryService implements DirectoryService {
     required String newValue,
   }) {
     final ignoredFiles = [
-      '$directoryPath\\${ProjectPath.androidMainManifestPath}'.replacePathSeparators(),
-      '$directoryPath\\${ProjectPath.androidDebugManifestPath}'.replacePathSeparators(),
-      '$directoryPath\\${ProjectPath.androidProfileManifestPath}'.replacePathSeparators(),
-      '$directoryPath\\${ProjectPath.androidAppGradlePath}'.replacePathSeparators(),
+      '$directoryPath\\${ProjectPath.androidMainManifestPath}'
+          .replacePathSeparators(),
+      '$directoryPath\\${ProjectPath.androidDebugManifestPath}'
+          .replacePathSeparators(),
+      '$directoryPath\\${ProjectPath.androidProfileManifestPath}'
+          .replacePathSeparators(),
+      '$directoryPath\\${ProjectPath.androidAppGradlePath}'
+          .replacePathSeparators(),
     ];
 
-    Logger.info('Updating all files contents from $directoryPath value $oldValue to $newValue');
+    Logger.info(
+        'Updating all files contents from $directoryPath value $oldValue to $newValue');
     final directory = Directory(directoryPath);
 
     for (final file in directory.listSync(recursive: true).whereType<File>()) {

@@ -14,7 +14,8 @@ class ExtractProjectArchiveJob extends ConfigurableJob {
   @override
   Future<void> execute() async {
     final archivePath =
-        '${config.projectPath.value!}\\${config.projectName.value!}.zip'.replacePathSeparators();
+        '${config.projectPath.value!}\\${config.projectName.value!}.zip'
+            .replacePathSeparators();
     await _templateRepository.extractTemplateFromArchive(
       archiveInputPath: archivePath,
       templateOutputPath: config.projectPath.value!,
