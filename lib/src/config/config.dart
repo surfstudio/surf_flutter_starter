@@ -47,7 +47,8 @@ class Config {
   /// Validity of [Config].
   ///
   /// Validity is, as a whole, based on validity of all [Config]'s [ConfigParameter].
-  bool get isValid => projectPath.isValid && projectName.isValid && appID.isValid;
+  bool get isValid =>
+      projectPath.isValid && projectName.isValid && appID.isValid;
 
   /// [Config] constructor, in which parameters are passed.
   const Config({

@@ -1,5 +1,4 @@
 import 'package:surf_flutter_starter/src/config/config.dart';
-import 'package:surf_flutter_starter/src/utils/replace_path_separators_x.dart';
 
 /// Single user-specified [ConfigParameter] for [Config].
 abstract class ConfigParameter<T extends Object?> {
@@ -24,13 +23,16 @@ class ProjectPath extends ConfigParameter<String?> {
   static const androidAppGradlePath = 'android\\app\\build.gradle';
 
   /// Default path to main manifest.
-  static const androidMainManifestPath = 'android\\app\\src\\main\\AndroidManifest.xml';
+  static const androidMainManifestPath =
+      'android\\app\\src\\main\\AndroidManifest.xml';
 
   /// Default path to debug manifest.
-  static const androidDebugManifestPath = 'android\\app\\src\\debug\\AndroidManifest.xml';
+  static const androidDebugManifestPath =
+      'android\\app\\src\\debug\\AndroidManifest.xml';
 
   /// Default path to profile manifest.
-  static const androidProfileManifestPath = 'android\\app\\src\\profile\\AndroidManifest.xml';
+  static const androidProfileManifestPath =
+      'android\\app\\src\\profile\\AndroidManifest.xml';
 
   /// Path to kotlin activity class.
   static const oldKotlinPath =

@@ -1,13 +1,16 @@
+## Description
+
 surf_flutter_starter is a CLI tool for fast and easy creation of Flutter projects.
 
-## Usage
+## Installation
 
 To activate Flutter Starter, you have to add it to pub:
 ```sh
 $ dart pub global activate surf_flutter_starter
 ```
+## Example
 
-and then run
+In order to use this tool you have to execute command:
 
 ```sh
 $ dart pub global run surf_flutter_starter create

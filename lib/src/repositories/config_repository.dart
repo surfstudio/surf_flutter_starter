@@ -6,9 +6,11 @@ import 'package:surf_flutter_starter/src/config/config_parameter.dart';
 import 'package:surf_flutter_starter/src/services/dialog_service.dart';
 import 'package:surf_flutter_starter/src/utils/replace_path_separators_x.dart';
 
-const _createInCurrentPrompt = 'Do yoy want to create project in current directory? (Y/N)';
+const _createInCurrentPrompt =
+    'Do yoy want to create project in current directory? (Y/N)';
 const _projectNamePrompt = 'Enter your project\'s name (like_this):';
-const _appLabelPrompt = 'Enter your project\'s label (label). Something like (App Name):';
+const _appLabelPrompt =
+    'Enter your project\'s label (label). Something like (App Name):';
 const _appIDPrompt = 'Enter your project\'s application ID (com.example.id):';
 
 /// Handles all [Config] interactions.
@@ -37,7 +39,8 @@ class ConfigRepository {
     final projectPath = _getProjectPath();
     _configBuilder.buildProjectPath(projectPath);
 
-    final projectName = _dialogService.getUserInput(userPrompt: _projectNamePrompt);
+    final projectName =
+        _dialogService.getUserInput(userPrompt: _projectNamePrompt);
     _configBuilder.buildProjectName(projectName);
 
     final appLabel = _dialogService.getUserInput(userPrompt: _appLabelPrompt);
@@ -55,7 +58,8 @@ class ConfigRepository {
     if (isInCurrentDirectory) {
       return Directory.current.path;
     }
-    final projectPath = _dialogService.getUserInput(userPrompt: _projectPathPrompt);
+    final projectPath =
+        _dialogService.getUserInput(userPrompt: _projectPathPrompt);
     return projectPath;
   }
 }

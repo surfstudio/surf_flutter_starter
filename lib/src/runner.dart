@@ -62,7 +62,8 @@ class StarterCommandRunner extends CommandRunner<int> {
     // Jobs:
     final _getConfigCLIJob = GetConfigCLIJob(_configRepository);
     final _cloneTemplateJob = CloneTemplateJob(_templateRepository);
-    final _extractProjectArchiveJob = ExtractProjectArchiveJob(_templateRepository);
+    final _extractProjectArchiveJob =
+        ExtractProjectArchiveJob(_templateRepository);
     final _renameProjectJob = RenameProjectJob(_templateRepository);
     <Command<int>>[
       CreateCommand(
