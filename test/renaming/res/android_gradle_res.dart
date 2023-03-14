@@ -1,4 +1,4 @@
-import 'package:surf_flutter_starter/test/renaming/res/test_res.dart';
+import 'test_res.dart';
 
 /// Gradle content from flutter_template
 const gradleTest = '''

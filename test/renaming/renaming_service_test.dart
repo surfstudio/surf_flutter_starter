@@ -3,16 +3,18 @@ import 'package:surf_flutter_starter/src/constants.dart';
 import 'package:surf_flutter_starter/src/services/directory_service.dart';
 import 'package:surf_flutter_starter/src/services/renaming_service.dart';
 import 'package:surf_flutter_starter/src/utils/replace_path_separators_x.dart';
-import 'package:surf_flutter_starter/test/renaming/res/android_gradle_res.dart';
-import 'package:surf_flutter_starter/test/renaming/res/common_file.dart';
-import 'package:surf_flutter_starter/test/renaming/res/debug_android_manifest.dart';
-import 'package:surf_flutter_starter/test/renaming/res/main_activity.dart';
-import 'package:surf_flutter_starter/test/renaming/res/main_android_manifest.dart';
-import 'package:surf_flutter_starter/test/renaming/res/plist.dart';
-import 'package:surf_flutter_starter/test/renaming/res/profile_android_manifest.dart';
-import 'package:surf_flutter_starter/test/renaming/res/test_res.dart';
+import 'res/android_gradle_res.dart';
+import 'res/common_file.dart';
+import 'res/debug_android_manifest.dart';
+import 'res/main_activity.dart';
+import 'res/main_android_manifest.dart';
+
 import 'package:test/test.dart';
 import 'package:mocktail/mocktail.dart';
+
+import 'res/plist.dart';
+import 'res/profile_android_manifest.dart';
+import 'res/test_res.dart';
 
 /// Mock for [IODirectoryService]
 class DirectoryServiceMock extends Mock implements DirectoryService {}

@@ -1,15 +1,15 @@
-import 'package:surf_flutter_starter/test/renaming/res/test_res.dart';
+import 'test_res.dart';
 
-/// Profile manifest content from flutter_template
-const profileManifestTest = '''
+/// Debug manifest content from flutter_template
+const debugManifestTest = '''
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="dev.surf.flutter_template">
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
 ''';
 
-/// Profile manifest content after renaming
-const renamedProfileManifestTest = '''
+/// Debug manifest content after renaming
+const renamedDebugManifestTest = '''
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="$bundleId">
     <uses-permission android:name="android.permission.INTERNET" />
