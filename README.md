@@ -1,3 +1,5 @@
+## Description
+
 surf_flutter_starter is a CLI tool for fast and easy creation of Flutter projects.
 
 ## Usage
