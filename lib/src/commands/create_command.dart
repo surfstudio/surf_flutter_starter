@@ -34,7 +34,8 @@ class CreateCommand extends BaseCommand {
 
   @override
   Future<int> run() async {
-    final hasConfigPath = argResults?['config-path'] != null && (argResults!['config-path'] as String).isNotEmpty;
+    final hasConfigPath =
+        argResults?['config-path'] != null && (argResults!['config-path'] as String).isNotEmpty;
     if (hasConfigPath) {
       await _automaticCreator.start();
     } else {

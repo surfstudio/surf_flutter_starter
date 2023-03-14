@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:surf_flutter_starter/src/config/config_parameter.dart';
 import 'package:surf_flutter_starter/src/utils/logger.dart';
 import 'package:surf_flutter_starter/src/utils/replace_path_separators_x.dart';
 
@@ -106,12 +107,22 @@ class IODirectoryService implements DirectoryService {
     required String oldValue,
     required String newValue,
   }) {
+    final ignoredFiles = [
+      '$directoryPath\\${ProjectPath.androidMainManifestPath}'.replacePathSeparators(),
+      '$directoryPath\\${ProjectPath.androidDebugManifestPath}'.replacePathSeparators(),
+      '$directoryPath\\${ProjectPath.androidProfileManifestPath}'.replacePathSeparators(),
+      '$directoryPath\\${ProjectPath.androidAppGradlePath}'.replacePathSeparators(),
+    ];
+
     Logger.info('Updating all files contents from $directoryPath value $oldValue to $newValue');
     final directory = Directory(directoryPath);
 
     for (final file in directory.listSync(recursive: true).whereType<File>()) {
       if (!file.path.contains('.png')) {
-        final newFileContent = file.readAsStringSync().replaceAll(oldValue, newValue);
+        String newFileContent = file.readAsStringSync();
+        if (!ignoredFiles.contains(file.path)) {
+          newFileContent = newFileContent.replaceAll(oldValue, newValue);
+        }
         file.writeAsStringSync(newFileContent);
       }
     }

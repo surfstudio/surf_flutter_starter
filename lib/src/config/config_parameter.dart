@@ -1,4 +1,5 @@
 import 'package:surf_flutter_starter/src/config/config.dart';
+import 'package:surf_flutter_starter/src/utils/replace_path_separators_x.dart';
 
 /// Single user-specified [ConfigParameter] for [Config].
 abstract class ConfigParameter<T extends Object?> {
@@ -19,6 +20,31 @@ abstract class ConfigParameter<T extends Object?> {
 
 /// Directory path, in which project is going to be created.
 class ProjectPath extends ConfigParameter<String?> {
+  /// Default path to gradle manifest.
+  static const androidAppGradlePath = 'android\\app\\build.gradle';
+
+  /// Default path to main manifest.
+  static const androidMainManifestPath = 'android\\app\\src\\main\\AndroidManifest.xml';
+
+  /// Default path to debug manifest.
+  static const androidDebugManifestPath = 'android\\app\\src\\debug\\AndroidManifest.xml';
+
+  /// Default path to profile manifest.
+  static const androidProfileManifestPath = 'android\\app\\src\\profile\\AndroidManifest.xml';
+
+  /// Path to kotlin activity class.
+  static const oldKotlinPath =
+      'android\\app\\src\\main\\kotlin\\com\\example\\flutter_template\\MainActivity.kt';
+
+  /// Path to package id.
+  static const oldIDPath = 'android\\app\\src\\main\\kotlin\\com\\example';
+
+  /// Path to Plist.
+  static const iosInfoPlistPath = 'ios\\Runner\\Info.plist';
+
+  /// Path to ios common.
+  static const iosCommonPath = 'ios\\Flutter\\common.xcconfig';
+
   @override
   bool get isValid => value != null && value!.isNotEmpty;
 
@@ -49,10 +75,10 @@ class AppLabel extends ConfigParameter<String?> {
 /// Application ID of project, that is going to be created.
 class AppID extends ConfigParameter<String?> {
   /// Default value of [AppID].
-  static const defaultPackageID = 'com.example.flutter_template';
+  static const defaultPackageID = 'dev.surf.flutter_template';
 
   /// Default value of [AppID] (variant).
-  static const defaultAppID = 'ru.surfstudio.flutterTemplate';
+  static const defaultAppID = 'dev.surf.flutter_template';
   @override
   bool get isValid => value != null && value!.isNotEmpty;
 

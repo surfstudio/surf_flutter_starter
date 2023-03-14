@@ -7,16 +7,17 @@ import 'package:surf_flutter_starter/src/services/dialog_service.dart';
 import 'package:surf_flutter_starter/src/utils/replace_path_separators_x.dart';
 
 const _createInCurrentPrompt = 'Do yoy want to create project in current directory? (Y/N)';
-const _projectNamePrompt = 'Please, type in project name (like_this):';
-const _appLabelPrompt = 'Please, type in app name (label). Something like (App Name):';
-const _appIDPrompt = 'Please, type in app ID (com.example.id):';
+const _projectNamePrompt = 'Enter your project\'s name (like_this):';
+const _appLabelPrompt = 'Enter your project\'s label (label). Something like (App Name):';
+const _appIDPrompt = 'Enter your project\'s application ID (com.example.id):';
 
 /// Handles all [Config] interactions.
 class ConfigRepository {
   final DialogService _dialogService;
   final ConfigBuilder _configBuilder;
 
-  final _projectPathPrompt = 'Please, type in path to project (C:\\path\\to\\project):'.replacePathSeparators();
+  final _projectPathPrompt =
+      'Enter path to project (C:\\path\\to\\project):'.replacePathSeparators();
 
   /// Constructor, in which services are passed.
   ConfigRepository(
@@ -49,8 +50,8 @@ class ConfigRepository {
   }
 
   String _getProjectPath() {
-    final isInCurrentDirectory =
-        _dialogService.isYesInput(userPrompt: '$_createInCurrentPrompt \n${Directory.current.path}');
+    final isInCurrentDirectory = _dialogService.isYesInput(
+        userPrompt: '$_createInCurrentPrompt \n${Directory.current.path}');
     if (isInCurrentDirectory) {
       return Directory.current.path;
     }
