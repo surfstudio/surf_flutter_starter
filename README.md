@@ -12,22 +12,24 @@ surf_flutter_starter is a CLI tool for fast and easy creation of Flutter project
 ## Usage
 
 To activate Flutter Starter, you have to add it to pub:
+
 ```sh
-$ dart pub global activate surf_flutter_starter
+dart pub global activate surf_flutter_starter
 ```
 
 and then run
 
 ```sh
-$ dart pub global run surf_flutter_starter create
+dart pub global run surf_flutter_starter create
 ```
 
 Dialog prompts will appear to follow project creation process.
 
 ## Features
 
-Flutter project creation based on surf template(https://github.com/surfstudio/surf-flutter-app-template).
+Flutter project creation based on surf template(<https://github.com/surfstudio/surf-flutter-app-template>).
 For the time being, it can change:
+
 - Project name.
 - App ID.
 - App Label.
@@ -35,6 +37,7 @@ For the time being, it can change:
 ## Getting started
 
 Help in general:
+
 ```sh
 CLI-tool for creating new Flutter projects, based on surf-flutter-app-template
 
@@ -50,6 +53,7 @@ Available commands:
 ```
 
 Create command:
+
 ```sh
 Usage: surf_flutter_starter create
 -h, --help           Print this usage information.
@@ -57,11 +61,13 @@ Usage: surf_flutter_starter create
 ```
 
 ## CLI Architecture
+
 <img src="https://github.com/surfstudio/surf_flutter_starter/blob/main/images/CLI-Project-Generator-Structure.png" width="740">
 
-
 ### Jobs
+
 Regular Job:
+
 ```dart
 /// Atomic task, which does something and returns `Object?` on completion.
 ///
@@ -78,6 +84,7 @@ abstract class Job {
 ```
 
 Configurable Job:
+
 ```dart
 /// [Job] requires [Config], as project-describing entity.
 abstract class ConfigurableJob extends Job {
@@ -97,7 +104,9 @@ abstract class ConfigurableJob extends Job {
 ```
 
 ### Config
+
 Config is a set of parameters, which specify project, that is being created.
+
 ```dart
 /// Describes new project, that is being created.
 ///
@@ -109,4 +118,3 @@ class Config {
   /// ...
 }
 ```
-
