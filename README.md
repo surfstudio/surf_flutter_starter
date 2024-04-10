@@ -1,3 +1,10 @@
+# Flutter Starter
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/surfstudio/flutter-open-source/blob/887525c23f4d57a2d96fc2e6a31e15d1e29d1787/assets/logo_white.png">
+  <img alt="Shows an illustrated sun in light color mode and a moon with stars in dark color mode." src="https://github.com/surfstudio/flutter-open-source/blob/887525c23f4d57a2d96fc2e6a31e15d1e29d1787/assets/logo_black.png" width ="200">
+</picture>
+
 surf_flutter_starter is a CLI tool for fast and easy creation of Flutter projects.
 
 ## Usage
