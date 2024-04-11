@@ -118,3 +118,9 @@ class Config {
   /// ...
 }
 ```
+
+## How to reach us
+
+Please feel free to ask any questions about this package. Join our community chat on Telegram. We speak English and Russian.
+
+[![Telegram](https://img.shields.io/badge/chat-on%20Telegram-blue.svg)](https://t.me/SurfGear)
