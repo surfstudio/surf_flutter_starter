@@ -1,24 +1,35 @@
+# Flutter Starter
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/surfstudio/flutter-open-source/blob/887525c23f4d57a2d96fc2e6a31e15d1e29d1787/assets/logo_white.png">
+  <img alt="Shows an illustrated sun in light color mode and a moon with stars in dark color mode." src="https://github.com/surfstudio/flutter-open-source/blob/887525c23f4d57a2d96fc2e6a31e15d1e29d1787/assets/logo_black.png" width ="200">
+</picture>
+
+## Overview
+
 surf_flutter_starter is a CLI tool for fast and easy creation of Flutter projects.
 
 ## Usage
 
 To activate Flutter Starter, you have to add it to pub:
+
 ```sh
-$ dart pub global activate surf_flutter_starter
+dart pub global activate surf_flutter_starter
 ```
 
 and then run
 
 ```sh
-$ dart pub global run surf_flutter_starter create
+dart pub global run surf_flutter_starter create
 ```
 
 Dialog prompts will appear to follow project creation process.
 
 ## Features
 
-Flutter project creation based on surf template(https://github.com/surfstudio/surf-flutter-app-template).
+Flutter project creation based on surf template(<https://github.com/surfstudio/surf-flutter-app-template>).
 For the time being, it can change:
+
 - Project name.
 - App ID.
 - App Label.
@@ -26,6 +37,7 @@ For the time being, it can change:
 ## Getting started
 
 Help in general:
+
 ```sh
 CLI-tool for creating new Flutter projects, based on surf-flutter-app-template
 
@@ -41,6 +53,7 @@ Available commands:
 ```
 
 Create command:
+
 ```sh
 Usage: surf_flutter_starter create
 -h, --help           Print this usage information.
@@ -48,11 +61,13 @@ Usage: surf_flutter_starter create
 ```
 
 ## CLI Architecture
+
 <img src="https://github.com/surfstudio/surf_flutter_starter/blob/main/images/CLI-Project-Generator-Structure.png" width="740">
 
-
 ### Jobs
+
 Regular Job:
+
 ```dart
 /// Atomic task, which does something and returns `Object?` on completion.
 ///
@@ -69,6 +84,7 @@ abstract class Job {
 ```
 
 Configurable Job:
+
 ```dart
 /// [Job] requires [Config], as project-describing entity.
 abstract class ConfigurableJob extends Job {
@@ -88,7 +104,9 @@ abstract class ConfigurableJob extends Job {
 ```
 
 ### Config
+
 Config is a set of parameters, which specify project, that is being created.
+
 ```dart
 /// Describes new project, that is being created.
 ///
@@ -101,3 +119,8 @@ class Config {
 }
 ```
 
+## How to reach us
+
+Please feel free to ask any questions about this package. Join our community chat on Telegram. We speak English and Russian.
+
+[![Telegram](https://img.shields.io/badge/chat-on%20Telegram-blue.svg)](https://t.me/SurfGear)
